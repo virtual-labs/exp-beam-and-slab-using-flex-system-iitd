@@ -6,7 +6,7 @@ let cd = new Date();
 var currentDateGlobal = `${cd.getDate()} - ${
   cd.getMonth() + 1
 } - ${cd.getFullYear()}`;
-console.log(currentDateGlobal);
+ ;
 
 // * Quiz object
 const Quiz = {
@@ -257,10 +257,32 @@ let isPerformNext = false;
 // animation is running
 let isRunning = false;
 // to set isProcessRunning and also sync the progressbar + drawer
+// ! and toggle the next btn active / deactive
+function toggleNextBtn(){
+  let nextBtn = document.querySelector(".btn-next")
+  nextBtn.classList.toggle("btn-deactive")
+}
 const setIsProcessRunning = (value) => {
+  // calling toggle the next
+  if(value != isRunning){
+    toggleNextBtn()
+  }
+  // the step is ended
+  if(!value){
+    // reset showArrowMenuItemNumber 
+    Scenes.menuItemNumber = 1
+    setCC("Click 'Next' to go to next step");
+    get(".blinkArrow").classList.add("bright");
+    Dom.setBlinkArrow(true, 790, 415).play();
+    Scenes.activeAllMenuItems()
+  }
   isRunning = value;
   if(value){
     Dom.hideAll()
+    get(".blinkArrow").classList.remove("bright");
+    window.speechSynthesis.cancel();
+    if(ccQueue)
+      ccQueue = []
   }
 };
 
@@ -340,7 +362,7 @@ function setCC(text = null, speed = null) {
     strings: ["", ...ccQueue],
     typeSpeed: 25,
     onStringTyped(){
-      console.log(ccQueue);
+       ;
       ccQueue.shift();
       // if(ccQueue.length != 0){
       //   setCC(ccQueue.shift())
@@ -908,6 +930,45 @@ objective : new Dom("objective"),
   contentAdderAddBtn(text) {
     Scenes.items.contentAdderBox.item.innerHTML += `<li class="btn content-adder">${text}</li>`;
   },
+  // ! Show arrow according to menu item number
+  menuItemNumber: 1,
+  showArrowForMenuItem(repeat=false){
+    if(repeat){
+      this.menuItemNumber--;
+    }
+    this.disableInvalidMenuItemsClick()
+
+    let menuLeftOffset = get(".content-adder-box").offsetLeft
+    let gapArrowWith = 71
+
+    this.leftGap = menuLeftOffset - gapArrowWith
+
+    let initialFixedTop = -35
+    let gapTopFixed = 50
+    let finalTop = initialFixedTop
+
+    for(let i=1;i< this.menuItemNumber;i++){
+      finalTop+=gapTopFixed 
+    }
+
+    this.menuItemNumber++
+    Dom.setBlinkArrow(true, this.leftGap, finalTop).play()
+  },
+  // ! to disable menu item clicks
+  disableInvalidMenuItemsClick(){
+    let allMenuItems = getAll(".content-adder-box li")
+    allMenuItems.forEach(menuItem => {
+      menuItem.style.pointerEvents = "none"
+    })
+
+    allMenuItems[this.menuItemNumber - 1].style.pointerEvents = ""
+  },
+  activeAllMenuItems(){
+    getAll(".content-adder-box li").forEach(item=>item.style.pointerEvents = "")
+  },
+  repeatShowArrowForMenuItem(){
+    this.showArrowForMenuItem(true)
+  },
   currentStep: 0,
   subCurrentStep: 0,
   resetSubStep() {
@@ -924,11 +985,18 @@ objective : new Dom("objective"),
   // for typing hello text
   intru: null,
   intruVoice: null,
+  experimentNameCertificate: "Beam and Slab Formwork Using Flex System",
+  experimentNameIntro: "Beam and Slab Formwork Using Flex System Experiment",
+  experimentNameSpeech: "Beam and Slab Formwork Using Flex System",
   steps: [
     (intro = () => {
       // remove all dom element for back and setProcessRunning
       setIsProcessRunning(true);
 
+
+      // ! set The experiment name
+      let welcomeBoxExpName = get(".welcome-box .title span:nth-child(2)")
+      welcomeBoxExpName.innerHTML = Scenes.experimentNameIntro
 
       // starting elements
 
@@ -951,7 +1019,9 @@ objective : new Dom("objective"),
           return;
         }
         // take only first space
-        let fName = student_name.slice(0, student_name.indexOf(" "));
+        let spaceIndex = student_name.indexOf(" ")
+        spaceIndex = spaceIndex == -1 ? student_name.length : spaceIndex + 1 
+        let fName = student_name.slice(0, spaceIndex);
         hide(error);
         let tl = anime.timeline({
           easing: "easeOutExpo",
@@ -982,7 +1052,7 @@ objective : new Dom("objective"),
               Scenes.items.tempText.set(482, 1);
               textToSpeach(`Hey! ${fName}`);
               textToSpeach(
-                "Welcome to Foundation Wall in Foamwork Experiment of Foamwork Technology in Civil Engineering Virtual Lab developed by Prof. K. N. Jha, Department of Civil Engineering, IIT Delhi."
+                `Welcome to ${Scenes.experimentNameSpeech} Experiment of Formwork Technology in Civil Engineering Virtual Lab developed by Professor K N Jha, Department of Civil Engineering, IIT Delhi.`
               );
               Scenes.items.talk_cloud.set(450, -40, 180).push();
               setCC("");
@@ -1001,8 +1071,6 @@ objective : new Dom("objective"),
             .add({
               duration: 12000,
               complete() {
-                setCC("Click 'Next' to go to next step");
-                Dom.setBlinkArrow(true, 790, 444).play();
                 setIsProcessRunning(false);
             },
           });
@@ -1029,331 +1097,192 @@ objective : new Dom("objective"),
       duration:4000, 
       complete(){
         setIsProcessRunning(false);
-        Dom.setBlinkArrow(true, 790, 444).play();
-        setCC("Click 'Next' to go to next step");
-
       }
 
     })
     return true;
-  }),
-    // (step1 = function () {
-    //   setIsProcessRunning(true);
-    //   // to hide previous step
-    //   Dom.hideAll();
+    }),
+    // (step2 = function () {
+    //   // ! fixing the overflow
+    //   Scenes.items.anime_main_dom.item.style.overflow = "visible";
+
+    //   // hide
     //   Scenes.items.projectIntro.hide()
+    //   Dom.hideAll();
+    //   setIsProcessRunning(true);
     //   Dom.setBlinkArrow(-1);
-
-    //   Scenes.setStepHeading("Step 1", "Marking the area (rectangularly)");
-    //   Scenes.items.land.set(0,0,404,950)
-
-    //   Scenes.items.chalk_with_hand.set(140,138,80,70).zIndex(6)
       
-    //   Scenes.items.chalk_markings1.set(140,150,6,670).zIndex(5)
-    //   Scenes.items.marking_surface1.set(140,150,8,670).zIndex(5)
+    //   Scenes.setStepHeading("Step 2", "Colums step.")
 
-    //   Scenes.items.chalk_markings2.set(757,200,6,100).rotate(90).zIndex(5)
-    //   Scenes.items.marking_surface2.set(757,200,8,100).rotate(90).zIndex(5)
+    //   // * Required Elements
+    //   Scenes.items.base_floor.set(100,-100).hide()
 
-    //   Scenes.items.chalk_markings3.set(140,252,6,670).zIndex(5)
-    //   Scenes.items.marking_surface3.set(140,252,8,670).zIndex(5)
+    //   // Scenes.items.column_1_rods.set(0,0)
+    //   // Scenes.items.column_2_rods.set(0,0).zIndex(1)
+    //   // Scenes.items.column_3_rods.set(0,0)
+    //   // Scenes.items.column_4_rods.set(0,0)
+      
+    //   // Scenes.items.column_1.set(0,0).zIndex(1)
+    //   // Scenes.items.column_2.set(0,0).zIndex(2)
+    //   // Scenes.items.column_3.set(0,0).zIndex(1)
+    //   // Scenes.items.column_4.set(0,0).zIndex(1)
 
-    //   Scenes.items.chalk_markings4.set(94,200,6,100).rotate(90).zIndex(4)
-    //   Scenes.items.marking_surface4.set(94,200,8,100).rotate(90).zIndex(4)
 
-    //   // Scenes.items.chalk_markings5.set(284,201,6,282.8).rotate(45).zIndex(3)
-    //   // Scenes.items.marking_surface5.set(284,201,8,282.8).rotate(45).zIndex(3)
+    //   // ! Final Pos
+    //   // Scenes.items.base_floor_cutout.set(0,0)
 
-    //   // Scenes.items.chalk_markings6.set(284,201,6,282.8).rotate(-45).zIndex(2)
-    //   // Scenes.items.marking_surface6.set(284,201,8,282.8).rotate(-45).zIndex(2)
+    //   Scenes.items.base_floor.set(0,0)
+    //   Scenes.items.base_floor_helper.set(0,0).zIndex(5)
+    //   Scenes.items.base_floor_helper_for_back.set(0,0).zIndex(6)
 
-    //   Scenes.items.tempTitle1.set(815,190).setContent("300 mm").hidden()
-    //   Scenes.items.tempTitle2.set(425,260).setContent("2400 mm").hidden()
+    //   Scenes.items.column_1_rods.set(0,210)
+    //   Scenes.items.column_2_rods.set(0,210).zIndex(2)
+    //   Scenes.items.column_3_rods.set(0,210)
+    //   Scenes.items.column_4_rods.set(0,210)
 
-    //   setCC("Click on the hand to mark the area rectangularly.")
-    //   Dom.setBlinkArrow(true,65,130 ).play()
-    //   // onclick
-    //   Scenes.items.chalk_with_hand.item.onclick = ()=>{
-    //     Dom.setBlinkArrow(-1);
+    //   Scenes.items.column_back.set(0,410).zIndex(1)
+    //   Scenes.items.column_front.set(0,210).zIndex(8)
+    //   Scenes.items.column_right.set(0,210).zIndex(1)
+    //   Scenes.items.column_left.set(0,210).zIndex(1)
 
+    //   Scenes.items.contentAdderBox.set(null,-50).show("flex")
+    //   Scenes.contentAdderAddBtn("Base")
+    //   Scenes.contentAdderAddBtn("Bare Rebar")
+    //   Scenes.contentAdderAddBtn("Columns")
+
+    //   function basePlateAnime(){ 
+    //     Dom.setBlinkArrow(-1)
     //     anime.timeline({
-    //       easing: "easeOutExpo"
+    //       easing: "easeInOutQuad",
     //     })
     //     .add({
+    //       targets: Scenes.items.base_floor.item,
     //       begin(){
-    //         Scenes.items.anime_main_dom.item.style.overflow = "hidden";
-    //       },
-    //       targets: [Scenes.items.chalk_with_hand.item,Scenes.items.marking_surface1.item],
-    //       translateX: 670,
+    //         Scenes.items.base_floor.show();
+    //       },  
+    //       keyframes:[
+    //         {left : 0},
+    //         {top: 0},
+    //       ],
     //       duration: 3000,
+    //       complete(){
+    //         setCC("Click on the 'HD Tower' to put it on the base plate.");      
+    //         Scenes.showArrowForMenuItem()
+    //       }  
     //     })
-    //     .add({
-    //       begin(){
-    //         setCC("Marking the vertical length of 300mm")
-    //       },
-    //       targets: [Scenes.items.chalk_with_hand.item],
-    //       translateY: 100,
-    //       duration: 3000,
-    //       complete(){
-    //         Scenes.items.tempTitle1.hidden(false)
-    //       }
-    //     },3000)// marking of right vertical surface
-    //     .add({
-    //       targets: [Scenes.items.marking_surface2.item],
-    //       translateX: 100,
-    //       duration: 3000,
-    //     },3000)
-    //     .add({
-    //       begin(){
-    //         setCC("Marking the horizontal length of 300mm")
-    //       },
-    //       targets: [Scenes.items.marking_surface3.item],
-    //       translateX: -670,
-    //       duration: 3000,
-    //       complete(){
-    //         Scenes.items.tempTitle2.hidden(false)
-    //       }
-    //     },6000)
-    //     .add({
-    //       targets: [Scenes.items.chalk_with_hand.item],
-    //       translateX: 0,
-    //       duration: 3000,
-    //     },6000)
-    //     .add({
-    //       targets: [Scenes.items.chalk_with_hand.item],
-    //       translateY: 0,
-    //       duration: 3000,
-    //     },9000)// marking of left vertical surface
-    //     .add({
-    //       targets: [Scenes.items.marking_surface4.item],
-    //       top: "-=100",
-    //       duration: 3000,
-    //       complete(){
-    //         Dom.setBlinkArrow(true, 790, 408).play()
-    //         // Quiz.loadQuiz()
-    //         setCC("Click 'Next' to go to next step")
-    //         setIsProcessRunning(false)
-    //       }
-    //     },9000)
-    //     // .add({
-    //     //   targets: [Scenes.items.chalk_with_hand.item],
-    //     //   left: "+=200",
-    //     //   top: "+=200",
-    //     //   duration: 3000,
-    //     // },12000)
-    //     // .add({
-    //     //   targets: [Scenes.items.marking_surface5.item],
-    //     //   translateX: 282.8,
-    //     //   duration: 3000,
-    //     // },12000)
-    //     // .add({
-    //     //   begin(){
-    //     //     Scenes.items.chalk_with_hand.set(525,88)
-    //     //   },
-    //     //   endDelay: 500,
-    //     // })
-    //     // .add({
-    //     //   targets: [Scenes.items.chalk_with_hand.item],
-    //     //   translateX: -200.8,
-    //     //   translateY: 200.8,
-    //     //   duration: 3000,
-    //     // },15500)
-    //     // .add({
-    //     //   targets: [Scenes.items.marking_surface6.item],
-    //     //   translateX: -282.8,
-    //     //   duration: 3000,
-    //     //   complete(){
-    //     //     Dom.setBlinkArrow(true, 790, 408).play()
-    //     //     // Quiz.loadQuiz()
-    //     //     setCC("Click 'Next' to go to next step")
-    //     //     setIsProcessRunning(false)
-    //     //   }
-    //     // },15500)
     //   }
-    //   return true
-    // }),
-    (step2 = function () {
-      // ! fixing the overflow
-      Scenes.items.anime_main_dom.item.style.overflow = "visible";
 
-      // hide
-      Scenes.items.projectIntro.hide()
-      Dom.hideAll();
-      setIsProcessRunning(true);
-      Dom.setBlinkArrow(-1);
-      
-      Scenes.setStepHeading("Step 2", "Colums step.")
+    //   function hdTowerAnime(){
+    //     Dom.setBlinkArrow(-1)
+    //     anime.timeline({
+    //       easing: "easeInOutQuad",
+    //       duration: 2000,
+    //     })
+    //     .add({
+    //       targets: Scenes.items.column_1_rods.item,
+    //       keyframes:[
+    //         {top: 0},
+    //       ],
+    //       rotate: 0,
+    //     })
+    //     .add({
+    //       targets: Scenes.items.column_4_rods.item,
+    //       keyframes:[
+    //         {top: 0},
+    //       ],
+    //       rotate: 0,
+    //       complete(){
+    //         Scenes.items.base_floor_helper_for_back.hide()
+    //       }
+    //     })
+    //     .add({
+    //       targets: Scenes.items.column_3_rods.item,
+    //       keyframes:[
+    //         {top: 0},
+    //       ],
+    //       rotate: 0,
+    //     })
+    //     .add({
+    //       targets: Scenes.items.column_2_rods.item,
+    //       keyframes:[
+    //         {top: 0},
+    //       ],
+    //       complete(){
+    //         setCC("Click on the 'U-Head' to put it on the CT Prop");      
+    //         Scenes.showArrowForMenuItem()
+    //         Scenes.items.base_floor_helper_for_back.show()
+    //         Scenes.items.column_2_rods.set(0,0).zIndex(7)
 
-      // * Required Elements
-      Scenes.items.base_floor.set(100,-100).hide()
+    //       }  
+    //     })        
+    //   }
 
-      // Scenes.items.column_1_rods.set(0,0)
-      // Scenes.items.column_2_rods.set(0,0).zIndex(1)
-      // Scenes.items.column_3_rods.set(0,0)
-      // Scenes.items.column_4_rods.set(0,0)
-      
-      // Scenes.items.column_1.set(0,0).zIndex(1)
-      // Scenes.items.column_2.set(0,0).zIndex(2)
-      // Scenes.items.column_3.set(0,0).zIndex(1)
-      // Scenes.items.column_4.set(0,0).zIndex(1)
-
-
-      // ! Final Pos
-      // Scenes.items.base_floor_cutout.set(0,0)
-
-      Scenes.items.base_floor.set(0,0)
-      Scenes.items.base_floor_helper.set(0,0).zIndex(5)
-      Scenes.items.base_floor_helper_for_back.set(0,0).zIndex(6)
-
-      Scenes.items.column_1_rods.set(0,210)
-      Scenes.items.column_2_rods.set(0,210).zIndex(2)
-      Scenes.items.column_3_rods.set(0,210)
-      Scenes.items.column_4_rods.set(0,210)
-
-      Scenes.items.column_back.set(0,410).zIndex(1)
-      Scenes.items.column_front.set(0,210).zIndex(8)
-      Scenes.items.column_right.set(0,210).zIndex(1)
-      Scenes.items.column_left.set(0,210).zIndex(1)
-
-      Scenes.items.contentAdderBox.set(null,-50).show("flex")
-      Scenes.contentAdderAddBtn("Base")
-      Scenes.contentAdderAddBtn("Bare Rebar")
-      Scenes.contentAdderAddBtn("Columns")
-
-      function basePlateAnime(){ 
-        Dom.setBlinkArrow(-1)
-        anime.timeline({
-          easing: "easeInOutQuad",
-        })
-        .add({
-          targets: Scenes.items.base_floor.item,
-          begin(){
-            Scenes.items.base_floor.show();
-          },  
-          keyframes:[
-            {left : 0},
-            {top: 0},
-          ],
-          duration: 3000,
-          complete(){
-            setCC("Click on the 'HD Tower' to put it on the base plate.");      
-            Dom.setBlinkArrow(true, 705,15).play();
-          }  
-        })
-      }
-
-      function hdTowerAnime(){
-        Dom.setBlinkArrow(-1)
-        anime.timeline({
-          easing: "easeInOutQuad",
-          duration: 2000,
-        })
-        .add({
-          targets: Scenes.items.column_1_rods.item,
-          keyframes:[
-            {top: 0},
-          ],
-          rotate: 0,
-        })
-        .add({
-          targets: Scenes.items.column_4_rods.item,
-          keyframes:[
-            {top: 0},
-          ],
-          rotate: 0,
-          complete(){
-            Scenes.items.base_floor_helper_for_back.hide()
-          }
-        })
-        .add({
-          targets: Scenes.items.column_3_rods.item,
-          keyframes:[
-            {top: 0},
-          ],
-          rotate: 0,
-        })
-        .add({
-          targets: Scenes.items.column_2_rods.item,
-          keyframes:[
-            {top: 0},
-          ],
-          complete(){
-            setCC("Click on the 'U-Head' to put it on the CT Prop");      
-            Dom.setBlinkArrow(true, 705,65).play();
-            Scenes.items.base_floor_helper_for_back.show()
-            Scenes.items.column_2_rods.set(0,0).zIndex(7)
-
-          }  
-        })        
-      }
-
-      function uHeadAnime(){
-        Dom.setBlinkArrow(-1)
-        anime.timeline({
-          easing: "easeInOutQuad",
-          duration: 2000,
-        })
-        .add({
-          targets: Scenes.items.column_left.item,
-          keyframes:[
-            {top: 3},
-          ],
-          rotate: 0,
-        })
-        .add({
-          targets: Scenes.items.column_back.item,
-          keyframes:[
-            {top: 3},
-          ],
-          rotate: 0,
-        })
-        .add({
-          targets: Scenes.items.column_right.item,
-          keyframes:[
-            {top: 3},
-          ],
-          rotate: 0,
-          complete(){
-            Scenes.items.base_floor_helper_for_back.hide()
-          }
-        })
-        .add({
-          targets: Scenes.items.column_front.item,
-          keyframes:[
-            {top: 3},
-          ],
-          complete(){
-            Dom.setBlinkArrow(true, 790, 408).play();
-            setCC("Click 'Next' to go to next step");
-            setIsProcessRunning(false);
-          }  
-        })                     
-      }
+    //   function uHeadAnime(){
+    //     Dom.setBlinkArrow(-1)
+    //     anime.timeline({
+    //       easing: "easeInOutQuad",
+    //       duration: 2000,
+    //     })
+    //     .add({
+    //       targets: Scenes.items.column_left.item,
+    //       keyframes:[
+    //         {top: 3},
+    //       ],
+    //       rotate: 0,
+    //     })
+    //     .add({
+    //       targets: Scenes.items.column_back.item,
+    //       keyframes:[
+    //         {top: 3},
+    //       ],
+    //       rotate: 0,
+    //     })
+    //     .add({
+    //       targets: Scenes.items.column_right.item,
+    //       keyframes:[
+    //         {top: 3},
+    //       ],
+    //       rotate: 0,
+    //       complete(){
+    //         Scenes.items.base_floor_helper_for_back.hide()
+    //       }
+    //     })
+    //     .add({
+    //       targets: Scenes.items.column_front.item,
+    //       keyframes:[
+    //         {top: 3},
+    //       ],
+    //       complete(){
+    //         setIsProcessRunning(false);
+    //       }  
+    //     })                     
+    //   }
 
     
 
 
-      setCC("Click on the 'Base Plate' to place it in the lab.");      
-      Dom.setBlinkArrow(true, 705, -35).play()
+    //   setCC("Click on the 'Base Plate' to place it in the lab.");      
+    //   Scenes.showArrowForMenuItem()
 
-      // onclick
-      let contentAdderBtns = getAll(".content-adder-box .btn")
-      contentAdderBtns[0].onclick = basePlateAnime
-      contentAdderBtns[1].onclick = hdTowerAnime
-      contentAdderBtns[2].onclick = uHeadAnime
-      // remove all the previous elements
-      // Dom.hideAll();
-      return true;  
+    //   // onclick
+    //   let contentAdderBtns = getAll(".content-adder-box .btn")
+    //   contentAdderBtns[0].onclick = basePlateAnime
+    //   contentAdderBtns[1].onclick = hdTowerAnime
+    //   contentAdderBtns[2].onclick = uHeadAnime
+    //   // remove all the previous elements
+    //   // Dom.hideAll();
+    //   return true;  
 
-    }),
-    (step3 = function () {
+    // }),
+    (step1 = function () {
       setIsProcessRunning(true);
 
       // todo all previous elements hide
+      Scenes.items.projectIntro.hide()
       Dom.hideAll();
       Scenes.items.contentAdderBox.item.innerHTML = ""
 
-      Scenes.setStepHeading("Step 3", "Adding stand for timber beams.");
+      Scenes.setStepHeading("Step 1", "Construct the basic frame to support beam and slab.");
       
       // * Required Elements
       Scenes.items.base_floor.set(0,0)
@@ -1505,8 +1434,8 @@ objective : new Dom("objective"),
             {top: 0},
           ],
           complete(){
-            Dom.setBlinkArrow(true, 655, 15).play()
-            setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+            Scenes.showArrowForMenuItem()
+            setCC("Click on the 'CT Prop' to attach it with tripod stand.")
           }
         })
       }
@@ -1577,8 +1506,8 @@ objective : new Dom("objective"),
             {top: 0},
           ],
           complete(){
-            Dom.setBlinkArrow(true, 655, 65).play()
-            setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+            Scenes.showArrowForMenuItem()
+            setCC("Click on the Fourway Head' to attach it with CT prop.")
           }
         })
       }
@@ -1649,8 +1578,8 @@ objective : new Dom("objective"),
             {top: 0},
           ],
           complete(){
-            Dom.setBlinkArrow(true, 655, 115).play()
-            setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+            Scenes.showArrowForMenuItem()
+            setCC("Click on the 'Repeat' to repeat the above steps.")
           }
         })
       }
@@ -1724,8 +1653,7 @@ objective : new Dom("objective"),
                 {top: 0},
               ],
               complete(){
-                Dom.setBlinkArrow(true, 655, 115).play()
-                setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+                Scenes.repeatShowArrowForMenuItem()
               }
             })
             break;
@@ -1765,8 +1693,7 @@ objective : new Dom("objective"),
                 {top: 0},
               ],
               complete(){
-                Dom.setBlinkArrow(true, 655, 115).play()
-                setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+                Scenes.repeatShowArrowForMenuItem()
               }
             })
           break
@@ -1806,8 +1733,6 @@ objective : new Dom("objective"),
                 {top: 0},
               ],
               complete(){
-                Dom.setBlinkArrow(true, 790, 408).play();
-                setCC("Click 'Next' to go to next step");
                 setIsProcessRunning(false);
               }
             })
@@ -1817,8 +1742,8 @@ objective : new Dom("objective"),
           repeatCount++
       }
 
-      Dom.setBlinkArrow(true, 655, -35).play();
-      setCC("Click on the 'Horizontal Bracing' to attach it with HD Towers.");
+      Scenes.showArrowForMenuItem()
+      setCC("Click on the 'Tripod Stand' to place the stands.");
       // onclick
       contentAdderBtns[0].onclick = horizontalBracingAnime;
       contentAdderBtns[1].onclick = diagonalBracingAnime;
@@ -1828,12 +1753,12 @@ objective : new Dom("objective"),
       return true;
 
     }),
-    (step4 = function () {
+    (step2 = function () {
       Dom.hideAll(); 
       setIsProcessRunning(true);
       Scenes.items.contentAdderBox.setContent("");
       Scenes.setStepHeading(
-        "Step 4",
+        "Step 2",
         "Placing aluminum beam and timber beam on the top of basic frame."
       );
 
@@ -2196,8 +2121,8 @@ objective : new Dom("objective"),
                       {top: 0},
                     ],
                     complete(){
-                      Dom.setBlinkArrow(true, 655, 15).play()
-                      setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+                      Scenes.showArrowForMenuItem()
+                      setCC("Click on the 'Timber Beam' to place it on aluminium beams.")
                     }
                   })
       }
@@ -2336,9 +2261,8 @@ objective : new Dom("objective"),
               {top: 0},
             ],
             complete(){
-              Dom.setBlinkArrow(true, 790, 408).play();
-              setCC("Click 'Next' to go to next step");
-              setIsProcessRunning(false);
+              Scenes.showArrowForMenuItem()
+              setCC("Click on the 'Sheathing' to place sheathing on timber beams.")
             }
           })
          
@@ -2399,15 +2323,13 @@ objective : new Dom("objective"),
                 {left: 0},
                 {top: 0},
               ],
-                    complete(){
-                      Dom.setBlinkArrow(true, 790, 408).play();
-                      setCC("Click 'Next' to go to next step");
-                      setIsProcessRunning(false);
-                    }
-                  })
+                complete(){
+                  setIsProcessRunning(false);
+                }
+              })
       }
      
-      Dom.setBlinkArrow(true, 655, -35).play();
+      Scenes.showArrowForMenuItem()
       setCC("Click on the 'Aluminium Beam' and attach it with basic frame");
       //onclick pipe waler 
       contentAdderBtns[0].onclick = aluminiumBeamAnime;
@@ -2417,12 +2339,12 @@ objective : new Dom("objective"),
       return true;
 
     }),
-    (step5 = function () {
+    (step3 = function () {
       setIsProcessRunning(true);
       Dom.hideAll()
       Scenes.setStepHeading(
-        "Step 5",
-        "Placing sheathing on the top of timber beam."
+        "Step 3",
+        "Construct beam using beam forming support (BFS)."
       );
       // todo remove all previous
       Scenes.items.contentAdderBox.setContent("");
@@ -2713,8 +2635,8 @@ objective : new Dom("objective"),
             {left: 0,top: 0}
           ],
           complete(){
-            Dom.setBlinkArrow(true, 655, 65).play()
-            setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+            Scenes.showArrowForMenuItem()
+            setCC("Click on the 'Timber Beam' to add timber beams for creating beam.")
           }
         })
       }
@@ -2761,8 +2683,8 @@ objective : new Dom("objective"),
             {left: 0,top: 0},
           ],
           complete(){
-            Dom.setBlinkArrow(true, 655, 65).play()
-            setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+            Scenes.showArrowForMenuItem()
+            setCC("Click on the 'Sheathing' to add sheathing.")
           }
         })
       }
@@ -2791,8 +2713,8 @@ objective : new Dom("objective"),
             {left: 0,top: 0}
           ],
           complete(){
-            Dom.setBlinkArrow(true, 655, 65).play()
-            setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+            Scenes.showArrowForMenuItem()
+            setCC("Click on the 'Repeat' to repeat the above steps.")
           }
         })
       }
@@ -2896,8 +2818,7 @@ objective : new Dom("objective"),
                 {left: 0,top: 0}
               ],
               complete(){
-                Dom.setBlinkArrow(true, 655, 65).play()
-                setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+                Scenes.repeatShowArrowForMenuItem()
               }
             })
             break
@@ -2961,8 +2882,7 @@ objective : new Dom("objective"),
                 {left: 0,top: 0}
               ],
               complete(){
-                Dom.setBlinkArrow(true, 655, 65).play()
-                setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+                Scenes.repeatShowArrowForMenuItem()
               }
             })
             break
@@ -3026,8 +2946,7 @@ objective : new Dom("objective"),
                 {left: 0,top: 0}
               ],
               complete(){
-                Dom.setBlinkArrow(true, 655, 65).play()
-                setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+                Scenes.repeatShowArrowForMenuItem()
               }
             })
             break
@@ -3091,10 +3010,8 @@ objective : new Dom("objective"),
                 {left: 0,top: 0}
               ],
               complete(){
-                Dom.setBlinkArrow(true, 790, 408).play();
-          setCC("Click 'Next' to go to next step");
-          setIsProcessRunning(false);
-          // Quiz.loadQuiz()
+                setIsProcessRunning(false);
+                // Quiz.loadQuiz()
               }
             })
             break
@@ -3102,8 +3019,9 @@ objective : new Dom("objective"),
         repeatCount++
       }
       
-      setCC("Click on the 'Sheathing' to add sheathing in the lab.");      
-      Dom.setBlinkArrow(true, 720,-35).play();
+      setCC("Click on the 'BFS' to attach BFS with timber beams.");      
+      Scenes.showArrowForMenuItem()
+
     //onclick
     contentAdderBtns[0].onclick = bfsAnime
     contentAdderBtns[1].onclick = timberBeamAnime
@@ -3126,8 +3044,8 @@ objective : new Dom("objective"),
       setIsProcessRunning(true);
  
       Scenes.setStepHeading(
-        "Step 6",
-        "Placing inner and outer beam with the help of beam forming support (BFS) with extension."
+        "Step 4",
+        "Construct the slab using CT prop, beam and sheathing."
       )
 
 
@@ -3361,18 +3279,18 @@ objective : new Dom("objective"),
     Scenes.items.slab_aluminium_beam_3.set(-500,-50).zIndex(31).hide()
     Scenes.items.slab_aluminium_beam_4.set(-500,-50).zIndex(31).hide()
     
-    Scenes.items.slab_timber_beam_1.set(200,-100).zIndex(31).hide()
-    Scenes.items.slab_timber_beam_2.set(200,-100).zIndex(31).hide()
-    Scenes.items.slab_timber_beam_3.set(200,-100).zIndex(31).hide()
-    Scenes.items.slab_timber_beam_4.set(200,-100).zIndex(31).hide()
-    Scenes.items.slab_timber_beam_5.set(200,-100).zIndex(31).hide()
-    Scenes.items.slab_timber_beam_6.set(200,-100).zIndex(31).hide()
-    Scenes.items.slab_timber_beam_7.set(200,-100).zIndex(31).hide()
-    Scenes.items.slab_timber_beam_8.set(200,-100).zIndex(31).hide()
-    Scenes.items.slab_timber_beam_9.set(200,-100).zIndex(31).hide()
-    Scenes.items.slab_timber_beam_10.set(200,-100).zIndex(32).hide()
-    Scenes.items.slab_timber_beam_11.set(200,-100).zIndex(32).hide()
-    Scenes.items.slab_timber_beam_12.set(200,-100).zIndex(32).hide()
+    Scenes.items.slab_timber_beam_1.set(200,-100).zIndex(32).hide()
+    Scenes.items.slab_timber_beam_2.set(200,-100).zIndex(32).hide()
+    Scenes.items.slab_timber_beam_3.set(200,-100).zIndex(32).hide()
+    Scenes.items.slab_timber_beam_4.set(200,-100).zIndex(32).hide()
+    Scenes.items.slab_timber_beam_5.set(200,-100).zIndex(32).hide()
+    Scenes.items.slab_timber_beam_6.set(200,-100).zIndex(32).hide()
+    Scenes.items.slab_timber_beam_7.set(200,-100).zIndex(32).hide()
+    Scenes.items.slab_timber_beam_8.set(200,-100).zIndex(32).hide()
+    Scenes.items.slab_timber_beam_9.set(200,-100).zIndex(32).hide()
+    Scenes.items.slab_timber_beam_10.set(200,-100).zIndex(33).hide()
+    Scenes.items.slab_timber_beam_11.set(200,-100).zIndex(33).hide()
+    Scenes.items.slab_timber_beam_12.set(200,-100).zIndex(33).hide()
     
     Scenes.items.slab_sheathing.set(-570,-70).zIndex(33).hide()
 
@@ -3448,8 +3366,8 @@ objective : new Dom("objective"),
         ],
         complete(){
           Scenes.items.slab_stand_helper.show()
-          Dom.setBlinkArrow(true, 655, 65).play()
-          setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+          Scenes.showArrowForMenuItem()
+          setCC("Click on the 'Aluminium Beam' to place them on CT Props.")
         }
       })
     }
@@ -3500,8 +3418,8 @@ objective : new Dom("objective"),
           {top: 0}
         ],
         complete(){
-          Dom.setBlinkArrow(true, 655, 65).play()
-          setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+          Scenes.showArrowForMenuItem()
+          setCC("Click on the 'Timber Beam' to place them on aluminium beams.")
         }
       })
     }
@@ -3543,9 +3461,9 @@ objective : new Dom("objective"),
         ],
       })
       .add({
-        targets: Scenes.items.slab_timber_beam_5.item,
+        targets: Scenes.items.slab_timber_beam_4.item,
         begin(){
-          Scenes.items.slab_timber_beam_5.show()
+          Scenes.items.slab_timber_beam_4.show()
         },
         keyframes: [
           {left: 0,},
@@ -3632,8 +3550,8 @@ objective : new Dom("objective"),
           {top: 0}
         ],
         complete(){
-          Dom.setBlinkArrow(true, 655, 65).play()
-          setCC("Click on the 'Right Beam Bracing' to attach it with HD Towers.")
+          Scenes.showArrowForMenuItem()
+          setCC("Click on the 'Sheathing' to add sheathing for the slab.")
         }
       })
     }
@@ -3648,21 +3566,22 @@ objective : new Dom("objective"),
         targets: Scenes.items.slab_sheathing.item,
         begin(){
           Scenes.items.slab_sheathing.show()
+          Scenes.items.slab_timber_beam_10.zIndex(32)
+          Scenes.items.slab_timber_beam_11.zIndex(32)
+          Scenes.items.slab_timber_beam_12.zIndex(32)
         },
         keyframes: [
           {left: 0},
           {top: 0}
         ],
         complete(){
-          Dom.setBlinkArrow(true, 790, 408).play();
-          setCC("Click 'Next' to go to next step");
           setIsProcessRunning(false);
           // Quiz.loadQuiz()
         }
       })
     }
-    setCC("Click on the 'BFS' to attach beam forming support with timber beam.")
-    Dom.setBlinkArrow(true,705,-35).play()
+    Scenes.showArrowForMenuItem()
+    setCC("Click on the 'CT Prop' to plcae the CT Props with tripod stand.")
     //onclick
     contentAdderBtns[0].onclick = standAnime
     contentAdderBtns[1].onclick = aluminiumBeamAnime
@@ -3681,359 +3600,17 @@ objective : new Dom("objective"),
         // };
       return true
     }),
-    // (step7 = function () {
-    //   Dom.hideAll(); 
-    //   setIsProcessRunning(true);
-    //   Scenes.items.contentAdderBox.setContent("");
-    //   Scenes.setStepHeading(
-    //     "Step 7",
-    //     "Making Slab using short prop, aluminum beam and timber beam."
-    //   );
-
-    // // ! required item
-    // Scenes.items.left_base_plate1.set(0,0)
-    // Scenes.items.left_base_plate2.set (0,0)
-    // Scenes.items.left_base_plate3.set(0,0)
-    // Scenes.items.left_base_plate4.set(0,0)  
-
-    // Scenes.items.right_base_plate1.set(0,0)
-    // Scenes.items.right_base_plate2.set(0,0)
-    // Scenes.items.right_base_plate3.set(0,0)
-    // Scenes.items.right_base_plate4.set(0,0)  
-    
-    // Scenes.items.left_ct_prop1.set(0,0)
-    // Scenes.items.left_ct_prop2.set(0,0)
-    // Scenes.items.left_ct_prop3.set(0,0)
-    // Scenes.items.left_ct_prop4.set(0,0)
-    // Scenes.items.right_ct_prop1.set(0,0)
-    // Scenes.items.right_ct_prop2.set(0,0)
-    // Scenes.items.right_ct_prop3.set(0,0)
-    // Scenes.items.right_ct_prop4.set(0,0)
-
-    // Scenes.items.left_uhead1.set(0,0)
-    // Scenes.items.left_uhead2.set(0,0)
-    // Scenes.items.left_uhead3.set(0,0)
-    // Scenes.items.left_uhead4.set(0,0)
-    // Scenes.items.right_uhead1.set(0,0)
-    // Scenes.items.right_uhead2.set(0,0)
-    // Scenes.items.right_uhead3.set(0,0)
-    // Scenes.items.right_uhead4.set(0,0)
-
-    // Scenes.items.left_aluminium1.set(0,0).zIndex(1)
-    // Scenes.items.left_aluminium2.set(0,0).zIndex(1)
-    // Scenes.items.right_aluminium1.set(0,0).zIndex(1)
-    // Scenes.items.right_aluminium2.set(0,0).zIndex(1)
-    
-    // Scenes.items .left_beam1.set(0,0).zIndex(2)
-    // Scenes.items .left_beam2.set(0,0).zIndex(2)
-    // Scenes.items .left_beam3.set(0,0).zIndex(2)
-    // Scenes.items .left_beam4.set(0,0).zIndex(2)
-    // Scenes.items .left_beam5.set(0,0).zIndex(2)
-    // Scenes.items .left_beam6.set(0,0).zIndex(2)
-    // Scenes.items.right_beam1.set(0,0).zIndex(2)
-    // Scenes.items.right_beam2.set(0,0).zIndex(2)
-    // Scenes.items.right_beam3.set(0,0).zIndex(2)
-    // Scenes.items.right_beam4.set(0,0).zIndex(2)
-    // Scenes.items.right_beam5.set(0,0).zIndex(2)
-    // Scenes.items.right_beam6.set(0,0).zIndex(2)
-
-    // Scenes.items.left_sheathing1.set(0,0).zIndex(3) 
-    // Scenes.items.left_sheathing1_nail_helper.set(0,0).zIndex(5)
-    // Scenes.items.left_sheathing1_nail1.set(0,8).zIndex(4)
-    // Scenes.items.left_sheathing1_nail2.set(0,8).zIndex(4)
-    // Scenes.items.left_sheathing1_nail3.set(0,8).zIndex(4)
-    // Scenes.items.left_sheathing1_nail4.set(0,8).zIndex(4)
-    
-    // Scenes.items.right_sheathing1.set(0,0).zIndex(3)
-    // Scenes.items.right_sheathing1_nail_helper.set(0,0).zIndex(5)
-    // Scenes.items.right_sheathing1_nail1.set(0,8).zIndex(4)
-    // Scenes.items.right_sheathing1_nail2.set(0,8).zIndex(4)
-    // Scenes.items.right_sheathing1_nail3.set(0,8).zIndex(4)
-    // Scenes.items.right_sheathing1_nail4.set(0,8).zIndex(4)
-  
-    // // image Box
-    // // Scenes.items.imageBox.show("flex").set(750,200)
-    // // Scenes.items.imageBoxSrc.item.src = "./src/images/real_head_adapter.png"
-    // // Scenes.items.imageBoxTitle.setContent("Head Adapter")
-
-    // Scenes.items.left_bfs1_left.set(0,0).zIndex(2)
-    // Scenes.items.left_bfs2_left.set(0,0).zIndex(2)
-    // Scenes.items.left_bfs3_left.set(0,0).zIndex(2)
-    // Scenes.items.left_bfs1_right.set(0,0).zIndex(6)
-    // Scenes.items.left_bfs2_right.set(0,0).zIndex(6)
-    // Scenes.items.left_bfs3_right.set(0,0).zIndex(6)
-
-    // Scenes.items.left_beam1_left.set(0,0).zIndex(3)
-    // Scenes.items.left_beam2_left.set(0,0).zIndex(3)
-    // Scenes.items.left_beam1_right.set(0,0).zIndex(6)
-    // Scenes.items.left_beam2_right.set(0,0).zIndex(6)
-
-    // Scenes.items.left_sheathing_left.set(0,0).zIndex(6)
-    // Scenes.items.left_sheathing_right.set(0,0).zIndex(3)
-
-
-    // Scenes.items.right_bfs1_left.set(0,0).zIndex(2)
-    // Scenes.items.right_bfs2_left.set(0,0).zIndex(2)
-    // Scenes.items.right_bfs3_left.set(0,0).zIndex(2)
-    // Scenes.items.right_bfs1_right.set(0,0).zIndex(9)
-    // Scenes.items.right_bfs2_right.set(0,0).zIndex(9)
-    // Scenes.items.right_bfs3_right.set(0,0).zIndex(9)
-
-    // Scenes.items.right_beam1_left.set(0,0).zIndex(3)
-    // Scenes.items.right_beam2_left.set(0,0).zIndex(3)
-    // Scenes.items.right_beam1_right.set(0,0).zIndex(8)
-    // Scenes.items.right_beam2_right.set(0,0).zIndex(8)
-
-    // Scenes.items.right_sheathing_left.set(0,0).zIndex(6)
-    // Scenes.items.right_sheathing_right.set(0,0).zIndex(7)
-    
-    // Scenes.items.left_bracing1.set(0,0).zIndex(1) 
-    // Scenes.items.left_bracing2.set(0,0).zIndex(1) 
-    // Scenes.items.left_bracing3.set(0,0).zIndex(1) 
-    // Scenes.items.left_bracing4.set(0,0) 
-    // Scenes.items.left_bracing5.set(0,0).zIndex(1)
-    // Scenes.items.left_bracing6.set(0,0).zIndex(1)
-    // Scenes.items.left_bracing7.set(0,0)
-    // Scenes.items.left_bracing8.set(0,0)
-    // Scenes.items.left_bracing9.set(0,0)
-    // Scenes.items.left_bracing10.set(0,0)
-
-    // Scenes.items.right_bracing1.set(0,0).zIndex(1)
-    // Scenes.items.right_bracing2.set(0,0).zIndex(1)
-    // Scenes.items.right_bracing3.set(0,0).zIndex(1)
-    // Scenes.items.right_bracing4.set(0,0)
-    // Scenes.items.right_bracing5.set(0,0).zIndex(1)
-    // Scenes.items.right_bracing6.set(0,0).zIndex(1)
-    // Scenes.items.right_bracing7.set(0,0)
-    // Scenes.items.right_bracing8.set(0,0)
-    // Scenes.items.right_bracing9.set(0,0)
-    // Scenes.items.right_bracing10.set(0,0) 
-    
-    // //! final pos
-    // Scenes.items.slab_short_prop1.set(-500,-30).zIndex(8)
-    // Scenes.items.slab_short_prop2.set(-500,-30).zIndex(8)
-    // Scenes.items.slab_short_prop3.set(-500,-30).zIndex(5)
-    // Scenes.items.slab_short_prop4.set(-500,-30).zIndex(5)
-
-    // Scenes.items.slab_uhead1.set(-500,-30).zIndex(8)
-    // Scenes.items.slab_uhead2.set(-500,-30).zIndex(8)
-    // Scenes.items.slab_uhead3.set(-500,-30).zIndex(8)
-    // Scenes.items.slab_uhead4.set(-500,-30).zIndex(8)
-    
-    // Scenes.items.slab_aluminium1.set(-500,-30).zIndex(9)
-    // Scenes.items.slab_aluminium2.set(-500,-30).zIndex(9)
-    
-    // Scenes.items.slab_beam1.set(-500,-30).zIndex(9)
-    // Scenes.items.slab_beam2.set(-500,-30).zIndex(9)
-    // Scenes.items.slab_beam3.set(-500,-30).zIndex(9)
-    // Scenes.items.slab_beam4.set(-500,-30).zIndex(9)
-    // Scenes.items.slab_beam5.set(-500,-30).zIndex(9)
-
-    // Scenes.items.slab_sheathing.set(-500,-30).zIndex(10)
-
-
-
-
-    // // content adder
-    // Scenes.items.contentAdderBox.set(null, -50).show("flex").push()
-    // Scenes.contentAdderAddBtn("Short Prop")
-    // Scenes.contentAdderAddBtn("U-Head")
-    // Scenes.contentAdderAddBtn("Aluminium Beam")
-    // Scenes.contentAdderAddBtn("Timber Beam")
-    // Scenes.contentAdderAddBtn("Sheathing")
-    // let contentAdderBtns = getAll(".content-adder-box .btn")
-      
-    // function shortPropAnime(){
-    //   anime.timeline({
-    //     easing: "easeInOutQuad",
-    //     duration: 2000,
-    //   })
-    //   .add({  
-    //     targets: Scenes.items.slab_short_prop1.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ]   
-    //   })
-    //   .add({
-    //     targets: Scenes.items.slab_short_prop2.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ]   
-    //   })
-    //   .add({  
-    //     targets: Scenes.items.slab_short_prop3.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ]   
-    //   })
-    //   .add({
-    //     targets: Scenes.items.slab_short_prop4.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ],
-    //     complete(){
-    //       setCC("Click on the 'U-Head' to attach u-head with shot prop.")    
-    //       Dom.setBlinkArrow(true, 675,15).play()
-    //     }  
-    //   })
-    // }
-
-    // function uHeadAnime(){
-    //   anime.timeline({
-    //     easing: "easeInOutQuad",
-    //     duration: 2000,
-    //   })
-    //   .add({  
-    //     targets: Scenes.items.slab_uhead1.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ]   
-    //   })
-    //   .add({
-    //     targets: Scenes.items.slab_uhead2.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ]   
-    //   })
-    //   .add({  
-    //     targets: Scenes.items.slab_uhead3.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ]   
-    //   })
-    //   .add({
-    //     targets: Scenes.items.slab_uhead4.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ],
-    //     complete(){
-    //       setCC("Click on the 'Aluminium Beam' to add aluminium beam.")    
-    //       Dom.setBlinkArrow(true, 675,65).play()
-    //     }  
-    //   })
-    // }
-
-    // function aluminiumBeamAnime(){
-    //   anime.timeline({
-    //     easing: "easeInOutQuad",
-    //     duration: 2000,
-    //   })
-    //   .add({  
-    //     targets: Scenes.items.slab_aluminium1.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ]   
-    //   })
-    //   .add({
-    //     targets: Scenes.items.slab_aluminium2.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ],
-    //     complete(){
-    //       setCC("Click on the 'Timber Beam' to add timber beam.")    
-    //       Dom.setBlinkArrow(true, 675,115).play()
-    //     }  
-    //   })
-    // }
-
-    // function timberBeamAnime(){
-    //   anime.timeline({
-    //     easing: "easeInOutQuad",
-    //     duration: 2000,
-    //   })
-    //   .add({
-    //     targets: Scenes.items.slab_beam1.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ]   
-    //   })
-    //   .add({
-    //     targets: Scenes.items.slab_beam2.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ]   
-    //   })
-    //   .add({
-    //     targets: Scenes.items.slab_beam3.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ]   
-    //   })
-    //   .add({
-    //     targets: Scenes.items.slab_beam4.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ]   
-    //   })
-    //   .add({
-    //     targets: Scenes.items.slab_beam5.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ],
-    //     complete(){
-    //       setCC("Click on the 'Sheathing' to add sheathing on the top of timber beam.")    
-    //       Dom.setBlinkArrow(true, 675,165).play()
-    //     }   
-    //   })     
-    // }
-
-    // function sheathingAnime(){
-    //   anime.timeline({
-    //     easing: "easeInOutQuad",
-    //     duration: 2000,
-    //   })
-    //   .add({  
-    //     targets: Scenes.items.slab_sheathing1.item,
-    //     keyframes : [
-    //       {left : 0},
-    //       {top: 0},
-    //     ],
-    //     complete(){
-    //       Dom.setBlinkArrow(true, 790, 408).play();
-    //       setCC("Click 'Next' to go to next step");
-    //       setIsProcessRunning(false);
-    //       // Quiz.loadQuiz()
-    //     }  
-    //   })
-    // }
-     
-     
-    //   Dom.setBlinkArrow(true, 675, -35).play();
-    //   setCC("Click on the 'Short Prop' and attach it with steel waler");
-    //  //onclick pipe waler 
-    //  i=0
-    //  contentAdderBtns[i++].onclick = shortPropAnime;
-    //  contentAdderBtns[i++].onclick = uHeadAnime;
-    //  contentAdderBtns[i++].onclick = aluminiumBeamAnime;
-    //  contentAdderBtns[i++].onclick = timberBeamAnime;
-    //  contentAdderBtns[i++].onclick = sheathingAnime;
-
-    //  return true;
-
-    // }), //f
     (completed = function () {
       Dom.hideAll();
       Scenes.items.contentAdderBox.setContent("");
 
+            let certificateExpName = get(".certificate .student-detail .row span:nth-child(2)")
+      certificateExpName.innerHTML = Scenes.experimentNameCertificate
+
       // get(".btn-save").style.display = "block";
       Scenes.items.btn_save.show().push();
       Dom.setBlinkArrow(-1);
-      setCC("Download it and share with your friends.");
+      setCC("Experiment completed, Download it and share with your friends.");
       // certificate name
       let certificateStuName = get("#certificateStuName");
       certificateStuName.innerHTML = student_name;
@@ -4064,7 +3641,9 @@ objective : new Dom("objective"),
       this.steps[this.currentStep]()
       this.currentStep++
       backDrawerItem()
-      backProgressBar()
+      backProgressBar();
+      // reset menu item for showArrow
+      this.menuItemNumber = 1
     }
   },
   next() {
@@ -4085,7 +3664,7 @@ objective : new Dom("objective"),
 }
 
 // stepcalling
-Scenes.currentStep = 2
+Scenes.currentStep = 0
 Scenes.next()  
 // Scenes.steps[3]()
 // Scenes.next()
@@ -4129,14 +3708,4 @@ muteBtn.addEventListener("click", () => {
 // i really enjoyed the voice of keybord
 // its amazing
 
-// mouse position
-function getCursor(event) {
-  let x = event.clientX;
-  let y = event.clientY;
-  let _position = `X: ${x - 419}<br>Y: ${y - 169}`;
-
-  const infoElement = document.getElementById("info");
-  infoElement.innerHTML = _position;
-  infoElement.style.top = y + "px";
-  infoElement.style.left = x + 20 + "px";
-}
+ 
