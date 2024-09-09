@@ -29,7 +29,6 @@ The Flex Formwork System is a versatile and adaptable method used for the constr
 <div style="float: left; width:100%;">
 
 #### 2. Installation of Flex Formwork System:<br>
-Here's a general overview of the steps involved in setting up formwork for a wall:<br>
 </div>
 
 <div style="float: left; width:100%;">
