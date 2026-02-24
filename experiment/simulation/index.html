@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./css/certificate.css" />
     <link rel="stylesheet" href="./css/chart.css" />
 
-    <link rel="stylesheet" href="./final_styling/fix_styling.css">
+    <link rel="stylesheet" href="./final_styling/fix_styling.css" />
     <script src="./js/jquery.min.js"></script>
     <script src="./final_styling/fix_styling.js"></script>
   </head>
@@ -70,18 +70,14 @@
             <li>
               <a>
                 <span class="step">
-                  <span
-                    >Construct beam using beam forming support (BFS).</span
-                  >
+                  <span>Construct beam using beam forming support (BFS).</span>
                 </span>
               </a>
             </li>
             <li>
               <a>
                 <span class="step">
-                  <span>
-                    Construct the slab using CT prop, beam and sheathing.
-                  </span>
+                  <span> Construct the slab using CT prop, beam and sheathing. </span>
                 </span>
               </a>
             </li>
@@ -120,10 +116,7 @@
           <section class="progress-bar">
             <div class="progressbar">
               <div class="progress" id="progress"></div>
-              <div
-                class="progress-step progress-step-active"
-                data-title=""
-              ></div>
+              <div class="progress-step progress-step-active" data-title=""></div>
               <div class="progress-step" data-title=""></div>
               <div class="progress-step" data-title=""></div>
               <div class="progress-step" data-title=""></div>
@@ -143,13 +136,45 @@
             <!-- transparent layer for question -->
             <div class="transparent-box"></div>
             <section class="anime-header">
+              <div id="drawer-toggle" class="drawer-toggle" title="Toggle Sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
               <p style="text-transform: uppercase">Beam and slab formwork using flex system</p>
-              <img
-                class="btn btn-mute"
-                style="height: 40px; z-index: 5; position: absolute; right: 5px"
-                src="./src/images/template_imgs/speech_off_btn.png"
-                title="Click To Mute"
-              />
+              <div class="header-controls">
+                <div class="speed-control" title="Animation Speed">
+                  <div class="icon-wrapper" title="Click to Reset Speed">
+                    <svg
+                      class="speed-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10" opacity="0.4" />
+                      <path d="M12 2a10 10 0 0 1 10 10" />
+                      <path
+                        d="M12 12l0-7"
+                        id="speed-needle"
+                        style="transform-origin: 12px 12px; transition: transform 0.2s ease;" />
+                      <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none" />
+                    </svg>
+                    <span class="speed-badge" id="speed-badge"></span>
+                  </div>
+                  <input type="range" id="speed-slider" min="0.5" max="3" step="0.1" value="1" />
+                </div>
+                <div class="divider"></div>
+                <img class="btn btn-mute" src="./src/images/template_imgs/speech_on_btn.png" title="Click To Mute" />
+                <div class="divider"></div>
+                <div id="fullscreen-btn" class="header-btn btn" title="Toggle Fullscreen">
+                  <svg id="fullscreen-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M10 3H3V10C3 10.26 3.10 10.51 3.29 10.70C3.48 10.89 3.73 11 4 11C4.26 11 4.51 10.89 4.70 10.70C4.89 10.51 5 10.26 5 10V6.41L9.29 10.70L9.36 10.77C9.56 10.92 9.80 11.00 10.04 10.99C10.29 10.98 10.52 10.87 10.70 10.70C10.87 10.52 10.98 10.29 10.99 10.04C11.00 9.80 10.92 9.56 10.77 9.36L10.70 9.29L6.41 5H10C10.26 5 10.51 4.89 10.70 4.70C10.89 4.51 11 4.26 11 4C11 3.73 10.89 3.48 10.70 3.29C10.51 3.10 10.26 3 10 3ZM20 13C19.73 13 19.48 13.10 19.29 13.29C19.10 13.48 19 13.73 19 14V17.58L14.70 13.29L14.63 13.22C14.43 13.07 14.19 12.99 13.95 13.00C13.70 13.01 13.47 13.12 13.29 13.29C13.12 13.47 13.01 13.70 13.00 13.95C12.99 14.19 13.07 14.43 13.22 14.63L13.29 14.70L17.58 19H14C13.73 19 13.48 19.10 13.29 19.29C13.10 19.48 13 19.73 13 20C13 20.26 13.10 20.51 13.29 20.70C13.48 20.89 13.73 21 14 21H21V14C21 13.73 20.89 13.48 20.70 13.29C20.51 13.10 20.26 13 20 13Z" />
+                  </svg>
+                </div>
+              </div>
             </section>
 
             <!-- * Project Intro Goes Here -->
@@ -158,68 +183,52 @@
               <p class="description">To Set the Beam and Slab using Flex System.</p>
               <span class="heading">Apparatus Materials:</span>
               <p class="description">
-                Tripod Stand, CT prop, fourway head, Aluminium Beam, Timber Beam, Plywood Sheathing, Beam Forming support. 
+                Tripod Stand, CT prop, fourway head, Aluminium Beam, Timber Beam, Plywood Sheathing, Beam Forming
+                support.
               </p>
             </div>
 
             <!-- * Steps Heading Template -->
             <div class="step-heading">
               <p class="step-title">Step 1</p>
-              <p class="step-description">
-                Calculation of cross-sectional area:
-              </p>
-            
+              <p class="step-description">Calculation of cross-sectional area:</p>
             </div>
-            
+
             <!-- * Content Adder Box -->
             <ul class="content-adder-box">
               <!-- <li class="btn content-adder">Footing</li> -->
             </ul>
 
             <!-- * Blink Arrow -->
-            <img
-                class="blinkArrow"
-                src="./src/images/template_imgs/blinkArrow.webp"
-              />
-            
-             <section class="anime-main">
-            <!-- <section class="anime-main" onmousemove="getCursor(event)"> -->
+            <img class="blinkArrow" src="./src/images/template_imgs/blinkArrow.webp" />
+
+            <section class="anime-main">
+              <!-- <section class="anime-main" onmousemove="getCursor(event)"> -->
               <!-- * Welcome note About Experiment-->
               <div class="welcome-box">
-                <img
-                  class="iit-logo"
-                  src="./src/images/template_imgs/iit-delhi-logo.png"
-                  alt=""
-                />
+                <img class="iit-logo" src="./src/images/template_imgs/iit-delhi-logo.png" alt="" />
                 <div class="title">
                   <span>Welcome to</span>
                   <span>Foundation in Beam Formwork Experiment</span>
-                  <span
-                    >of Formwork Technology in Civil Engineering Virtual
-                    Lab</span
-                  >
-                  <span
-                    >developed by Prof. K. N. Jha, Department of Civil
-                    Engineering, IIT Delhi.</span
-                  >
+                  <span>of Formwork Technology in Civil Engineering Virtual Lab</span>
+                  <span>developed by Prof. K. N. Jha, Department of Civil Engineering, IIT Delhi.</span>
                 </div>
                 <div class="prof-description">
                   <img
                     class="prof-img"
                     src="./src/images/template_imgs/prof_image_kn_jha.jpeg"
-                    alt="Prof. K. N. Jha Image"
-                  />
+                    alt="Prof. K. N. Jha Image" />
                   <span>Prof. K. N. Jha</span>
                   <span>IIT Delhi</span>
                 </div>
               </div>
 
               <!-- * Student Name section -->
-              <form onsubmit="return false" class="user-input">
+              <form onsubmit="return false;" class="user-input">
                 <p>Enter your name:</p>
                 <input type="text" name="" id="stuName" />
                 <p class="error">Please enter your name before start</p>
-                <input class="btn" id="nameSubmitBtn" type="submit" value="Start"/>
+                <input class="btn" id="nameSubmitBtn" type="submit" value="Start" />
               </form>
 
               <!-- * Calculations Table -->
@@ -237,9 +246,7 @@
                     <td class="cell"></td>
                   </tr>
                   <tr>
-                    <th class="cell" scope="col">
-                      Cross-sectional area (mm<sup>2</sup>)
-                    </th>
+                    <th class="cell" scope="col">Cross-sectional area (mm<sup>2</sup>)</th>
                     <td class="cell"></td>
                   </tr>
                 </tbody>
@@ -250,17 +257,10 @@
                 <section class="table__header">
                   <h4 style="margin-left: 32px">
                     Results<br />Date of test: <span id="date"></span><br />
-                                               Grade of Steel: 550 SD steel
+                    Grade of Steel: 550 SD steel
                   </h4>
                 </section>
-                <section
-                  class="table__body"
-                  style="
-                    display: flex;
-                    justify-content: center;
-                    overflow-y: overlay;
-                  "
-                >
+                <section class="table__body" style="display: flex; justify-content: center; overflow-y: overlay">
                   <table class="">
                     <tbody>
                       <tr>
@@ -268,38 +268,25 @@
                         <td class="cell">698</td>
                       </tr>
                       <tr>
-                        <th class="cell" scope="col">
-                          Length of specimen (mm)
-                        </th>
+                        <th class="cell" scope="col">Length of specimen (mm)</th>
                         <td class="cell">805</td>
                       </tr>
                       <tr>
                         <th class="cell" scope="col">
-                          Effective cross-sectional area,
-                          S<sub>o</sub>(mm<sup>2</sup>) =
-                          <img
-                            height="45"
-                            src="./src/images/S0_formula5"
-                            alt=""
-                          />
+                          Effective cross-sectional area, S<sub>o</sub>(mm<sup>2</sup>) =
+                          <img height="45" src="./src/images/S0_formula5" alt="" />
                         </th>
                         <td class="cell">110.4</td>
                       </tr>
                       <tr>
                         <th class="cell" scope="col">
                           Original gauge length L (mm) =
-                          <img
-                            height="20"
-                            src="./src/images/S0_formula3"
-                            alt=""
-                          />
+                          <img height="20" src="./src/images/S0_formula3" alt="" />
                         </th>
                         <td class="cell">59.4</td>
                       </tr>
                       <tr>
-                        <th class="cell" scope="col">
-                          Choosen gauge length L<sub>o</sub> (mm)
-                        </th>
+                        <th class="cell" scope="col">Choosen gauge length L<sub>o</sub> (mm)</th>
                         <td class="cell">60</td>
                       </tr>
                       <tr>
@@ -315,21 +302,15 @@
                         <td class="cell">1.25</td>
                       </tr>
                       <tr>
-                        <th class="cell" scope="col">
-                          Final gauge length, L<sub>u</sub> mm
-                        </th>
+                        <th class="cell" scope="col">Final gauge length, L<sub>u</sub> mm</th>
                         <td class="cell">77</td>
                       </tr>
                       <tr>
-                        <th class="cell" scope="col">
-                          Final diameter minimum (mm)
-                        </th>
+                        <th class="cell" scope="col">Final diameter minimum (mm)</th>
                         <td class="cell">7.1</td>
                       </tr>
                       <tr>
-                        <th class="cell" scope="col">
-                          % Elongation after fracture
-                        </th>
+                        <th class="cell" scope="col">% Elongation after fracture</th>
                         <td class="cell">28.33</td>
                       </tr>
                       <tr>
@@ -347,11 +328,9 @@
               </div>
 
               <!-- * Input box format for in anime questions -->
-              <form onsubmit="return false" class="temp-input">
-                <span class="text1"></span
-                ><input class="input" type="text" name="" id="ipnum" /><span
-                  class="text2"
-                ></span>
+              <form onsubmit="return false;" class="temp-input">
+                <span class="text1"></span><input class="input" type="text" name="" id="ipnum" /><span
+                  class="text2"></span>
                 <p class="error"></p>
                 <input class="submit-btn btn" type="submit" value="Submit" />
               </form>
@@ -399,20 +378,13 @@
                 </div>
                 <div class="student-detail">
                   <div class="row">
-                    <span
-                      style="text-transform: capitalize"
-                      class="bold red"
-                      id="certificateStuName"
-                      >Sneha Jadon</span
-                    >
+                    <span style="text-transform: capitalize" class="bold red" id="certificateStuName">Sneha Jadon</span>
                   </div>
                   <div class="row">
                     <span class="cursive" style="text-align: center"
                       >has succesfully performed Virtaul Lab Experiment on
                     </span>
-                    <span
-                      style="font-size: 1.5rem; text-transform: capitalize"
-                      class="bold sans red"
+                    <span style="font-size: 1.5rem; text-transform: capitalize" class="bold sans red"
                       >Foundation in Formwork</span
                     >
                   </div>
@@ -421,9 +393,7 @@
                     <span class="bold sans" id="quizScore">0</span>
                     <span class="bold sans">/5 Marks</span>
                     <span class="cursive">at</span> -->
-                    <span class="bold sans" id="certificateDate"
-                      >Date 10-10-2023</span
-                    >
+                    <span class="bold sans" id="certificateDate">Date 10-10-2023</span>
                   </div>
                   <div class="row">
                     <span class="cursive"
@@ -438,1347 +408,1096 @@
               <!-- * class main-window-imgs -->
               <!-- ! Example -->
 
-              <img
-                class="main-window-imgs"
-                src="./src/images/template_imgs/arrow.png"
-                title="arrow"
-                alt="arrow"
-              />
+              <img class="main-window-imgs" src="./src/images/template_imgs/arrow.png" title="arrow" alt="arrow" />
 
               <img
                 class="main-window-imgs"
                 src="./src/images/template_imgs/blinkArrow.webp"
                 title="blinkArrow"
-                alt="blinkArrow"
-              />
+                alt="blinkArrow" />
 
               <img
                 class="main-window-imgs"
                 src="./src/images/template_imgs/laerrow.png"
                 title="laerrow"
-                alt="laerrow"
-              />
+                alt="laerrow" />
 
               <img
                 class="main-window-imgs"
                 src="./src/images/template_imgs/laerrow2.png"
                 title="laerrow2"
-                alt="laerrow2"
-              />
+                alt="laerrow2" />
 
-              <img
-                class="main-window-imgs"
-                src="./src/images/template_imgs/logo.png"
-                title="logo"
-                alt="logo"
-              />
+              <img class="main-window-imgs" src="./src/images/template_imgs/logo.png" title="logo" alt="logo" />
 
-              <img
-                class="main-window-imgs"
-                src="./src/images/template_imgs/man.png"
-                title="man"
-                alt="man"
-              />
+              <img class="main-window-imgs" src="./src/images/template_imgs/man.png" title="man" alt="man" />
 
               <img
                 class="main-window-imgs"
                 src="./src/images/template_imgs/measurearrow.png"
                 title="measurearrow"
-                alt="measurearrow"
-              />
+                alt="measurearrow" />
 
               <img
                 class="main-window-imgs"
                 src="./src/images/template_imgs/measurearrow2.png"
                 title="measurearrow2"
-                alt="measurearrow2"
-              />
+                alt="measurearrow2" />
 
               <img
                 class="main-window-imgs"
                 src="./src/images/template_imgs/redsize.png"
                 title="redsize"
-                alt="redsize"
-              />
+                alt="redsize" />
 
               <img
                 class="main-window-imgs"
                 src="./src/images/template_imgs/speech_off_btn.png"
                 title="speech_off_btn"
-                alt="speech_off_btn"
-              />
+                alt="speech_off_btn" />
 
               <img
                 class="main-window-imgs"
                 src="./src/images/template_imgs/speech_on_btn.png"
                 title="speech_on_btn"
-                alt="speech_on_btn"
-              />
+                alt="speech_on_btn" />
 
               <img
                 class="main-window-imgs"
                 src="./src/images/template_imgs/talk_cloud.png"
                 title="talk_cloud"
-                alt="talk_cloud"
-              />
+                alt="talk_cloud" />
               <img
                 class="main-window-imgs"
                 src="./src/images/template_imgs/iit-delhi-logo.png"
                 title="iit-delhi-logo"
-                alt="iit-delhi-logo"
-              />
-              
-            
-    <!-- <img
+                alt="iit-delhi-logo" />
+
+              <!-- <img
     class="main-window-imgs"
     src="./src/images/aluminium_beam1.png"
     title="aluminium_beam1.png"
     alt="aluminium_beam1.png"
 /> -->
 
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_aluminimum_beam_1.png"
-title="back_left_aluminimum_beam_1.png"
-alt="back_left_aluminimum_beam_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_aluminimum_beam_2.png"
-title="back_left_aluminimum_beam_2.png"
-alt="back_left_aluminimum_beam_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_aluminimum_beam_3.png"
-title="back_left_aluminimum_beam_3.png"
-alt="back_left_aluminimum_beam_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_aluminimum_beam_4.png"
-title="back_left_aluminimum_beam_4.png"
-alt="back_left_aluminimum_beam_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_back_bfs.png"
-title="back_left_back_bfs.png"
-alt="back_left_back_bfs.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_back_sheathing.png"
-title="back_left_back_sheathing.png"
-alt="back_left_back_sheathing.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_back_timber_beams.png"
-title="back_left_back_timber_beams.png"
-alt="back_left_back_timber_beams.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_front_bfs.png"
-title="back_left_front_bfs.png"
-alt="back_left_front_bfs.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_front_sheathing.png"
-title="back_left_front_sheathing.png"
-alt="back_left_front_sheathing.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_front_timber_beams.png"
-title="back_left_front_timber_beams.png"
-alt="back_left_front_timber_beams.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_stand_1.png"
-title="back_left_stand_1.png"
-alt="back_left_stand_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_stand_1helper.png"
-title="back_left_stand_1helper.png"
-alt="back_left_stand_1helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_stand_2.png"
-title="back_left_stand_2.png"
-alt="back_left_stand_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_stand_2helper.png"
-title="back_left_stand_2helper.png"
-alt="back_left_stand_2helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_stand_3.png"
-title="back_left_stand_3.png"
-alt="back_left_stand_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_stand_3helper.png"
-title="back_left_stand_3helper.png"
-alt="back_left_stand_3helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_timber_beams.png"
-title="back_left_timber_beams.png"
-alt="back_left_timber_beams.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_aluminimum_beam_1.png"
-title="back_right_aluminimum_beam_1.png"
-alt="back_right_aluminimum_beam_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_aluminimum_beam_2.png"
-title="back_right_aluminimum_beam_2.png"
-alt="back_right_aluminimum_beam_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_aluminimum_beam_3.png"
-title="back_right_aluminimum_beam_3.png"
-alt="back_right_aluminimum_beam_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_aluminimum_beam_4.png"
-title="back_right_aluminimum_beam_4.png"
-alt="back_right_aluminimum_beam_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_back_bfs.png"
-title="back_right_back_bfs.png"
-alt="back_right_back_bfs.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_back_sheathing.png"
-title="back_right_back_sheathing.png"
-alt="back_right_back_sheathing.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_back_timber_beams.png"
-title="back_right_back_timber_beams.png"
-alt="back_right_back_timber_beams.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_front_bfs.png"
-title="back_right_front_bfs.png"
-alt="back_right_front_bfs.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_front_sheathing.png"
-title="back_right_front_sheathing.png"
-alt="back_right_front_sheathing.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_front_timber_beams.png"
-title="back_right_front_timber_beams.png"
-alt="back_right_front_timber_beams.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_stand_1.png"
-title="back_right_stand_1.png"
-alt="back_right_stand_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_stand_1helper.png"
-title="back_right_stand_1helper.png"
-alt="back_right_stand_1helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_stand_2.png"
-title="back_right_stand_2.png"
-alt="back_right_stand_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_stand_2helper.png"
-title="back_right_stand_2helper.png"
-alt="back_right_stand_2helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_stand_3.png"
-title="back_right_stand_3.png"
-alt="back_right_stand_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_stand_3helper.png"
-title="back_right_stand_3helper.png"
-alt="back_right_stand_3helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_timber_beams.png"
-title="back_right_timber_beams.png"
-alt="back_right_timber_beams.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/base_floor.png"
-title="base_floor.png"
-alt="base_floor.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/beam.png"
-title="beam.png"
-alt="beam.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/beam_aluminimum.png"
-title="beam_aluminimum.png"
-alt="beam_aluminimum.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/beam_aluminimum_flipped.png"
-title="beam_aluminimum_flipped.png"
-alt="beam_aluminimum_flipped.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/beam_flipped.png"
-title="beam_flipped.png"
-alt="beam_flipped.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/beam_flipped_small.png"
-title="beam_flipped_small.png"
-alt="beam_flipped_small.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/beam_flipped_without_holes.png"
-title="beam_flipped_without_holes.png"
-alt="beam_flipped_without_holes.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/beam_small.png"
-title="beam_small.png"
-alt="beam_small.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/beam_without_holes.png"
-title="beam_without_holes.png"
-alt="beam_without_holes.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/bfs_full1.png"
-title="bfs_full1.png"
-alt="bfs_full1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column1.png"
-title="column1.png"
-alt="column1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column2.png"
-title="column2.png"
-alt="column2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_1.png"
-title="column_1.png"
-alt="column_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_1_rods.png"
-title="column_1_rods.png"
-alt="column_1_rods.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_2.png"
-title="column_2.png"
-alt="column_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_2_rods.png"
-title="column_2_rods.png"
-alt="column_2_rods.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_3.png"
-title="column_3.png"
-alt="column_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_3_rods.png"
-title="column_3_rods.png"
-alt="column_3_rods.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_4.png"
-title="column_4.png"
-alt="column_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_4_rods.png"
-title="column_4_rods.png"
-alt="column_4_rods.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_back.png"
-title="column_back.png"
-alt="column_back.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_front.png"
-title="column_front.png"
-alt="column_front.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_left.png"
-title="column_left.png"
-alt="column_left.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_right.png"
-title="column_right.png"
-alt="column_right.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/ct_prop.png"
-title="ct_prop.png"
-alt="ct_prop.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_aluminimum_beam_1.png"
-title="front_left_aluminimum_beam_1.png"
-alt="front_left_aluminimum_beam_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_aluminimum_beam_2.png"
-title="front_left_aluminimum_beam_2.png"
-alt="front_left_aluminimum_beam_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_aluminimum_beam_3.png"
-title="front_left_aluminimum_beam_3.png"
-alt="front_left_aluminimum_beam_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_aluminimum_beam_4.png"
-title="front_left_aluminimum_beam_4.png"
-alt="front_left_aluminimum_beam_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_back_bfs.png"
-title="front_left_back_bfs.png"
-alt="front_left_back_bfs.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_back_sheathing.png"
-title="front_left_back_sheathing.png"
-alt="front_left_back_sheathing.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_back_timber_beams.png"
-title="front_left_back_timber_beams.png"
-alt="front_left_back_timber_beams.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_front_bfs.png"
-title="front_left_front_bfs.png"
-alt="front_left_front_bfs.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_front_sheathing.png"
-title="front_left_front_sheathing.png"
-alt="front_left_front_sheathing.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_front_timber_beams.png"
-title="front_left_front_timber_beams.png"
-alt="front_left_front_timber_beams.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_stand_1.png"
-title="front_left_stand_1.png"
-alt="front_left_stand_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_stand_1helper.png"
-title="front_left_stand_1helper.png"
-alt="front_left_stand_1helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_stand_2.png"
-title="front_left_stand_2.png"
-alt="front_left_stand_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_stand_2helper.png"
-title="front_left_stand_2helper.png"
-alt="front_left_stand_2helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_stand_3.png"
-title="front_left_stand_3.png"
-alt="front_left_stand_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_stand_3helper.png"
-title="front_left_stand_3helper.png"
-alt="front_left_stand_3helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_stand_4.png"
-title="front_left_stand_4.png"
-alt="front_left_stand_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_stand_4helper.png"
-title="front_left_stand_4helper.png"
-alt="front_left_stand_4helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_stand_5.png"
-title="front_left_stand_5.png"
-alt="front_left_stand_5.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_stand_5helper.png"
-title="front_left_stand_5helper.png"
-alt="front_left_stand_5helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_stand_6.png"
-title="front_left_stand_6.png"
-alt="front_left_stand_6.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_stand_6helper.png"
-title="front_left_stand_6helper.png"
-alt="front_left_stand_6helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_timber_beams.png"
-title="front_left_timber_beams.png"
-alt="front_left_timber_beams.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_aluminimum_beam_1.png"
-title="front_right_aluminimum_beam_1.png"
-alt="front_right_aluminimum_beam_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_aluminimum_beam_2.png"
-title="front_right_aluminimum_beam_2.png"
-alt="front_right_aluminimum_beam_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_aluminimum_beam_3.png"
-title="front_right_aluminimum_beam_3.png"
-alt="front_right_aluminimum_beam_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_aluminimum_beam_4.png"
-title="front_right_aluminimum_beam_4.png"
-alt="front_right_aluminimum_beam_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_back_bfs_1.png"
-title="front_right_back_bfs_1.png"
-alt="front_right_back_bfs_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_back_bfs_2.png"
-title="front_right_back_bfs_2.png"
-alt="front_right_back_bfs_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_back_bfs_3.png"
-title="front_right_back_bfs_3.png"
-alt="front_right_back_bfs_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_back_bfs_4.png"
-title="front_right_back_bfs_4.png"
-alt="front_right_back_bfs_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_back_sheathing_1.png"
-title="front_right_back_sheathing_1.png"
-alt="front_right_back_sheathing_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_back_sheathing_2.png"
-title="front_right_back_sheathing_2.png"
-alt="front_right_back_sheathing_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_back_timber_beam_1.png"
-title="front_right_back_timber_beam_1.png"
-alt="front_right_back_timber_beam_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_back_timber_beam_2.png"
-title="front_right_back_timber_beam_2.png"
-alt="front_right_back_timber_beam_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_back_timber_beam_3.png"
-title="front_right_back_timber_beam_3.png"
-alt="front_right_back_timber_beam_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_back_timber_beam_4.png"
-title="front_right_back_timber_beam_4.png"
-alt="front_right_back_timber_beam_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_bottom_sheathing_1.png"
-title="front_right_bottom_sheathing_1.png"
-alt="front_right_bottom_sheathing_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_bottom_sheathing_2.png"
-title="front_right_bottom_sheathing_2.png"
-alt="front_right_bottom_sheathing_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_ct_prop_1.png"
-title="front_right_ct_prop_1.png"
-alt="front_right_ct_prop_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_ct_prop_2.png"
-title="front_right_ct_prop_2.png"
-alt="front_right_ct_prop_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_ct_prop_3.png"
-title="front_right_ct_prop_3.png"
-alt="front_right_ct_prop_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_ct_prop_4.png"
-title="front_right_ct_prop_4.png"
-alt="front_right_ct_prop_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_ct_prop_5.png"
-title="front_right_ct_prop_5.png"
-alt="front_right_ct_prop_5.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_ct_prop_6.png"
-title="front_right_ct_prop_6.png"
-alt="front_right_ct_prop_6.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_fourway_head_1.png"
-title="front_right_fourway_head_1.png"
-alt="front_right_fourway_head_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_fourway_head_1helper.png"
-title="front_right_fourway_head_1helper.png"
-alt="front_right_fourway_head_1helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_fourway_head_2.png"
-title="front_right_fourway_head_2.png"
-alt="front_right_fourway_head_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_fourway_head_2helper.png"
-title="front_right_fourway_head_2helper.png"
-alt="front_right_fourway_head_2helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_fourway_head_3.png"
-title="front_right_fourway_head_3.png"
-alt="front_right_fourway_head_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_fourway_head_3helper.png"
-title="front_right_fourway_head_3helper.png"
-alt="front_right_fourway_head_3helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_fourway_head_4.png"
-title="front_right_fourway_head_4.png"
-alt="front_right_fourway_head_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_fourway_head_4helper.png"
-title="front_right_fourway_head_4helper.png"
-alt="front_right_fourway_head_4helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_fourway_head_5.png"
-title="front_right_fourway_head_5.png"
-alt="front_right_fourway_head_5.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_fourway_head_5helper.png"
-title="front_right_fourway_head_5helper.png"
-alt="front_right_fourway_head_5helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_fourway_head_6.png"
-title="front_right_fourway_head_6.png"
-alt="front_right_fourway_head_6.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_fourway_head_6helper.png"
-title="front_right_fourway_head_6helper.png"
-alt="front_right_fourway_head_6helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_front_bfs_1.png"
-title="front_right_front_bfs_1.png"
-alt="front_right_front_bfs_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_front_bfs_2.png"
-title="front_right_front_bfs_2.png"
-alt="front_right_front_bfs_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_front_bfs_3.png"
-title="front_right_front_bfs_3.png"
-alt="front_right_front_bfs_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_front_bfs_4.png"
-title="front_right_front_bfs_4.png"
-alt="front_right_front_bfs_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_front_sheathing_1.png"
-title="front_right_front_sheathing_1.png"
-alt="front_right_front_sheathing_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_front_sheathing_2.png"
-title="front_right_front_sheathing_2.png"
-alt="front_right_front_sheathing_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_front_timber_beam_1.png"
-title="front_right_front_timber_beam_1.png"
-alt="front_right_front_timber_beam_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_front_timber_beam_2.png"
-title="front_right_front_timber_beam_2.png"
-alt="front_right_front_timber_beam_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_front_timber_beam_3.png"
-title="front_right_front_timber_beam_3.png"
-alt="front_right_front_timber_beam_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_front_timber_beam_4.png"
-title="front_right_front_timber_beam_4.png"
-alt="front_right_front_timber_beam_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_timber_beams.png"
-title="front_right_timber_beams.png"
-alt="front_right_timber_beams.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_timber_beam_1.png"
-title="front_right_timber_beam_1.png"
-alt="front_right_timber_beam_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_timber_beam_2.png"
-title="front_right_timber_beam_2.png"
-alt="front_right_timber_beam_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_timber_beam_3.png"
-title="front_right_timber_beam_3.png"
-alt="front_right_timber_beam_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_timber_beam_4.png"
-title="front_right_timber_beam_4.png"
-alt="front_right_timber_beam_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_timber_beam_5.png"
-title="front_right_timber_beam_5.png"
-alt="front_right_timber_beam_5.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_timber_beam_6.png"
-title="front_right_timber_beam_6.png"
-alt="front_right_timber_beam_6.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_timber_beam_7.png"
-title="front_right_timber_beam_7.png"
-alt="front_right_timber_beam_7.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_timber_beam_8.png"
-title="front_right_timber_beam_8.png"
-alt="front_right_timber_beam_8.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_timber_beam_9.png"
-title="front_right_timber_beam_9.png"
-alt="front_right_timber_beam_9.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_tripod_1.png"
-title="front_right_tripod_1.png"
-alt="front_right_tripod_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_tripod_2.png"
-title="front_right_tripod_2.png"
-alt="front_right_tripod_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_tripod_3.png"
-title="front_right_tripod_3.png"
-alt="front_right_tripod_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_tripod_4.png"
-title="front_right_tripod_4.png"
-alt="front_right_tripod_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_tripod_5.png"
-title="front_right_tripod_5.png"
-alt="front_right_tripod_5.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_right_tripod_6.png"
-title="front_right_tripod_6.png"
-alt="front_right_tripod_6.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_left_bottom_sheathing.png"
-title="back_left_bottom_sheathing.png"
-alt="back_left_bottom_sheathing.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/back_right_bottom_sheathing.png"
-title="back_right_bottom_sheathing.png"
-alt="back_right_bottom_sheathing.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_1_only_rods.png"
-title="column_1_only_rods.png"
-alt="column_1_only_rods.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_2_only_rods.png"
-title="column_2_only_rods.png"
-alt="column_2_only_rods.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_3_only_rods.png"
-title="column_3_only_rods.png"
-alt="column_3_only_rods.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/column_4_only_rods.png"
-title="column_4_only_rods.png"
-alt="column_4_only_rods.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/front_left_bottom_sheathing.png"
-title="front_left_bottom_sheathing.png"
-alt="front_left_bottom_sheathing.png"
-/>
- 
-<img
-class="main-window-imgs"
-src="./src/images/front_right_bottom_sheathing.png"
-title="front_right_bottom_sheathing.png"
-alt="front_right_bottom_sheathing.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_aluminium_beam_1.png"
-title="slab_aluminium_beam_1.png"
-alt="slab_aluminium_beam_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_aluminium_beam_2.png"
-title="slab_aluminium_beam_2.png"
-alt="slab_aluminium_beam_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_aluminium_beam_3.png"
-title="slab_aluminium_beam_3.png"
-alt="slab_aluminium_beam_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_aluminium_beam_4.png"
-title="slab_aluminium_beam_4.png"
-alt="slab_aluminium_beam_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_sheathing.png"
-title="slab_sheathing.png"
-alt="slab_sheathing.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_stand_1.png"
-title="slab_stand_1.png"
-alt="slab_stand_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_stand_2.png"
-title="slab_stand_2.png"
-alt="slab_stand_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_stand_3.png"
-title="slab_stand_3.png"
-alt="slab_stand_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_stand_4.png"
-title="slab_stand_4.png"
-alt="slab_stand_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_stand_5.png"
-title="slab_stand_5.png"
-alt="slab_stand_5.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_stand_6.png"
-title="slab_stand_6.png"
-alt="slab_stand_6.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_stand_helper.png"
-title="slab_stand_helper.png"
-alt="slab_stand_helper.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_timber_beam_1.png"
-title="slab_timber_beam_1.png"
-alt="slab_timber_beam_1.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_timber_beam_10.png"
-title="slab_timber_beam_10.png"
-alt="slab_timber_beam_10.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_timber_beam_11.png"
-title="slab_timber_beam_11.png"
-alt="slab_timber_beam_11.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_timber_beam_12.png"
-title="slab_timber_beam_12.png"
-alt="slab_timber_beam_12.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_timber_beam_2.png"
-title="slab_timber_beam_2.png"
-alt="slab_timber_beam_2.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_timber_beam_3.png"
-title="slab_timber_beam_3.png"
-alt="slab_timber_beam_3.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_timber_beam_4.png"
-title="slab_timber_beam_4.png"
-alt="slab_timber_beam_4.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_timber_beam_5.png"
-title="slab_timber_beam_5.png"
-alt="slab_timber_beam_5.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_timber_beam_6.png"
-title="slab_timber_beam_6.png"
-alt="slab_timber_beam_6.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_timber_beam_7.png"
-title="slab_timber_beam_7.png"
-alt="slab_timber_beam_7.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_timber_beam_8.png"
-title="slab_timber_beam_8.png"
-alt="slab_timber_beam_8.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/slab_timber_beam_9.png"
-title="slab_timber_beam_9.png"
-alt="slab_timber_beam_9.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/base_floor_helper.png"
-/>
-<img
-class="main-window-imgs"
-src="./src/images/base_floor_cutout.png"
-/>
-
-
-<img
-class="main-window-imgs"
-src="./src/images/objective.png"
-/>
-
-<img
-class="main-window-imgs"
-src="./src/images/base_floor_helper_for_back.png"
-/>
-
-
-
-
-             
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_aluminimum_beam_1.png"
+                title="back_left_aluminimum_beam_1.png"
+                alt="back_left_aluminimum_beam_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_aluminimum_beam_2.png"
+                title="back_left_aluminimum_beam_2.png"
+                alt="back_left_aluminimum_beam_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_aluminimum_beam_3.png"
+                title="back_left_aluminimum_beam_3.png"
+                alt="back_left_aluminimum_beam_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_aluminimum_beam_4.png"
+                title="back_left_aluminimum_beam_4.png"
+                alt="back_left_aluminimum_beam_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_back_bfs.png"
+                title="back_left_back_bfs.png"
+                alt="back_left_back_bfs.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_back_sheathing.png"
+                title="back_left_back_sheathing.png"
+                alt="back_left_back_sheathing.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_back_timber_beams.png"
+                title="back_left_back_timber_beams.png"
+                alt="back_left_back_timber_beams.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_front_bfs.png"
+                title="back_left_front_bfs.png"
+                alt="back_left_front_bfs.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_front_sheathing.png"
+                title="back_left_front_sheathing.png"
+                alt="back_left_front_sheathing.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_front_timber_beams.png"
+                title="back_left_front_timber_beams.png"
+                alt="back_left_front_timber_beams.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_stand_1.png"
+                title="back_left_stand_1.png"
+                alt="back_left_stand_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_stand_1helper.png"
+                title="back_left_stand_1helper.png"
+                alt="back_left_stand_1helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_stand_2.png"
+                title="back_left_stand_2.png"
+                alt="back_left_stand_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_stand_2helper.png"
+                title="back_left_stand_2helper.png"
+                alt="back_left_stand_2helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_stand_3.png"
+                title="back_left_stand_3.png"
+                alt="back_left_stand_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_stand_3helper.png"
+                title="back_left_stand_3helper.png"
+                alt="back_left_stand_3helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_timber_beams.png"
+                title="back_left_timber_beams.png"
+                alt="back_left_timber_beams.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_aluminimum_beam_1.png"
+                title="back_right_aluminimum_beam_1.png"
+                alt="back_right_aluminimum_beam_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_aluminimum_beam_2.png"
+                title="back_right_aluminimum_beam_2.png"
+                alt="back_right_aluminimum_beam_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_aluminimum_beam_3.png"
+                title="back_right_aluminimum_beam_3.png"
+                alt="back_right_aluminimum_beam_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_aluminimum_beam_4.png"
+                title="back_right_aluminimum_beam_4.png"
+                alt="back_right_aluminimum_beam_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_back_bfs.png"
+                title="back_right_back_bfs.png"
+                alt="back_right_back_bfs.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_back_sheathing.png"
+                title="back_right_back_sheathing.png"
+                alt="back_right_back_sheathing.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_back_timber_beams.png"
+                title="back_right_back_timber_beams.png"
+                alt="back_right_back_timber_beams.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_front_bfs.png"
+                title="back_right_front_bfs.png"
+                alt="back_right_front_bfs.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_front_sheathing.png"
+                title="back_right_front_sheathing.png"
+                alt="back_right_front_sheathing.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_front_timber_beams.png"
+                title="back_right_front_timber_beams.png"
+                alt="back_right_front_timber_beams.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_stand_1.png"
+                title="back_right_stand_1.png"
+                alt="back_right_stand_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_stand_1helper.png"
+                title="back_right_stand_1helper.png"
+                alt="back_right_stand_1helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_stand_2.png"
+                title="back_right_stand_2.png"
+                alt="back_right_stand_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_stand_2helper.png"
+                title="back_right_stand_2helper.png"
+                alt="back_right_stand_2helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_stand_3.png"
+                title="back_right_stand_3.png"
+                alt="back_right_stand_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_stand_3helper.png"
+                title="back_right_stand_3helper.png"
+                alt="back_right_stand_3helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_timber_beams.png"
+                title="back_right_timber_beams.png"
+                alt="back_right_timber_beams.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/base_floor.png"
+                title="base_floor.png"
+                alt="base_floor.png" />
+
+              <img class="main-window-imgs" src="./src/images/beam.png" title="beam.png" alt="beam.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/beam_aluminimum.png"
+                title="beam_aluminimum.png"
+                alt="beam_aluminimum.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/beam_aluminimum_flipped.png"
+                title="beam_aluminimum_flipped.png"
+                alt="beam_aluminimum_flipped.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/beam_flipped.png"
+                title="beam_flipped.png"
+                alt="beam_flipped.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/beam_flipped_small.png"
+                title="beam_flipped_small.png"
+                alt="beam_flipped_small.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/beam_flipped_without_holes.png"
+                title="beam_flipped_without_holes.png"
+                alt="beam_flipped_without_holes.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/beam_small.png"
+                title="beam_small.png"
+                alt="beam_small.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/beam_without_holes.png"
+                title="beam_without_holes.png"
+                alt="beam_without_holes.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/bfs_full1.png"
+                title="bfs_full1.png"
+                alt="bfs_full1.png" />
+
+              <img class="main-window-imgs" src="./src/images/column1.png" title="column1.png" alt="column1.png" />
+
+              <img class="main-window-imgs" src="./src/images/column2.png" title="column2.png" alt="column2.png" />
+
+              <img class="main-window-imgs" src="./src/images/column_1.png" title="column_1.png" alt="column_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/column_1_rods.png"
+                title="column_1_rods.png"
+                alt="column_1_rods.png" />
+
+              <img class="main-window-imgs" src="./src/images/column_2.png" title="column_2.png" alt="column_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/column_2_rods.png"
+                title="column_2_rods.png"
+                alt="column_2_rods.png" />
+
+              <img class="main-window-imgs" src="./src/images/column_3.png" title="column_3.png" alt="column_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/column_3_rods.png"
+                title="column_3_rods.png"
+                alt="column_3_rods.png" />
+
+              <img class="main-window-imgs" src="./src/images/column_4.png" title="column_4.png" alt="column_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/column_4_rods.png"
+                title="column_4_rods.png"
+                alt="column_4_rods.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/column_back.png"
+                title="column_back.png"
+                alt="column_back.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/column_front.png"
+                title="column_front.png"
+                alt="column_front.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/column_left.png"
+                title="column_left.png"
+                alt="column_left.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/column_right.png"
+                title="column_right.png"
+                alt="column_right.png" />
+
+              <img class="main-window-imgs" src="./src/images/ct_prop.png" title="ct_prop.png" alt="ct_prop.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_aluminimum_beam_1.png"
+                title="front_left_aluminimum_beam_1.png"
+                alt="front_left_aluminimum_beam_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_aluminimum_beam_2.png"
+                title="front_left_aluminimum_beam_2.png"
+                alt="front_left_aluminimum_beam_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_aluminimum_beam_3.png"
+                title="front_left_aluminimum_beam_3.png"
+                alt="front_left_aluminimum_beam_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_aluminimum_beam_4.png"
+                title="front_left_aluminimum_beam_4.png"
+                alt="front_left_aluminimum_beam_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_back_bfs.png"
+                title="front_left_back_bfs.png"
+                alt="front_left_back_bfs.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_back_sheathing.png"
+                title="front_left_back_sheathing.png"
+                alt="front_left_back_sheathing.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_back_timber_beams.png"
+                title="front_left_back_timber_beams.png"
+                alt="front_left_back_timber_beams.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_front_bfs.png"
+                title="front_left_front_bfs.png"
+                alt="front_left_front_bfs.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_front_sheathing.png"
+                title="front_left_front_sheathing.png"
+                alt="front_left_front_sheathing.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_front_timber_beams.png"
+                title="front_left_front_timber_beams.png"
+                alt="front_left_front_timber_beams.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_stand_1.png"
+                title="front_left_stand_1.png"
+                alt="front_left_stand_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_stand_1helper.png"
+                title="front_left_stand_1helper.png"
+                alt="front_left_stand_1helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_stand_2.png"
+                title="front_left_stand_2.png"
+                alt="front_left_stand_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_stand_2helper.png"
+                title="front_left_stand_2helper.png"
+                alt="front_left_stand_2helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_stand_3.png"
+                title="front_left_stand_3.png"
+                alt="front_left_stand_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_stand_3helper.png"
+                title="front_left_stand_3helper.png"
+                alt="front_left_stand_3helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_stand_4.png"
+                title="front_left_stand_4.png"
+                alt="front_left_stand_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_stand_4helper.png"
+                title="front_left_stand_4helper.png"
+                alt="front_left_stand_4helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_stand_5.png"
+                title="front_left_stand_5.png"
+                alt="front_left_stand_5.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_stand_5helper.png"
+                title="front_left_stand_5helper.png"
+                alt="front_left_stand_5helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_stand_6.png"
+                title="front_left_stand_6.png"
+                alt="front_left_stand_6.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_stand_6helper.png"
+                title="front_left_stand_6helper.png"
+                alt="front_left_stand_6helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_timber_beams.png"
+                title="front_left_timber_beams.png"
+                alt="front_left_timber_beams.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_aluminimum_beam_1.png"
+                title="front_right_aluminimum_beam_1.png"
+                alt="front_right_aluminimum_beam_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_aluminimum_beam_2.png"
+                title="front_right_aluminimum_beam_2.png"
+                alt="front_right_aluminimum_beam_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_aluminimum_beam_3.png"
+                title="front_right_aluminimum_beam_3.png"
+                alt="front_right_aluminimum_beam_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_aluminimum_beam_4.png"
+                title="front_right_aluminimum_beam_4.png"
+                alt="front_right_aluminimum_beam_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_back_bfs_1.png"
+                title="front_right_back_bfs_1.png"
+                alt="front_right_back_bfs_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_back_bfs_2.png"
+                title="front_right_back_bfs_2.png"
+                alt="front_right_back_bfs_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_back_bfs_3.png"
+                title="front_right_back_bfs_3.png"
+                alt="front_right_back_bfs_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_back_bfs_4.png"
+                title="front_right_back_bfs_4.png"
+                alt="front_right_back_bfs_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_back_sheathing_1.png"
+                title="front_right_back_sheathing_1.png"
+                alt="front_right_back_sheathing_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_back_sheathing_2.png"
+                title="front_right_back_sheathing_2.png"
+                alt="front_right_back_sheathing_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_back_timber_beam_1.png"
+                title="front_right_back_timber_beam_1.png"
+                alt="front_right_back_timber_beam_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_back_timber_beam_2.png"
+                title="front_right_back_timber_beam_2.png"
+                alt="front_right_back_timber_beam_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_back_timber_beam_3.png"
+                title="front_right_back_timber_beam_3.png"
+                alt="front_right_back_timber_beam_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_back_timber_beam_4.png"
+                title="front_right_back_timber_beam_4.png"
+                alt="front_right_back_timber_beam_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_bottom_sheathing_1.png"
+                title="front_right_bottom_sheathing_1.png"
+                alt="front_right_bottom_sheathing_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_bottom_sheathing_2.png"
+                title="front_right_bottom_sheathing_2.png"
+                alt="front_right_bottom_sheathing_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_ct_prop_1.png"
+                title="front_right_ct_prop_1.png"
+                alt="front_right_ct_prop_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_ct_prop_2.png"
+                title="front_right_ct_prop_2.png"
+                alt="front_right_ct_prop_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_ct_prop_3.png"
+                title="front_right_ct_prop_3.png"
+                alt="front_right_ct_prop_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_ct_prop_4.png"
+                title="front_right_ct_prop_4.png"
+                alt="front_right_ct_prop_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_ct_prop_5.png"
+                title="front_right_ct_prop_5.png"
+                alt="front_right_ct_prop_5.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_ct_prop_6.png"
+                title="front_right_ct_prop_6.png"
+                alt="front_right_ct_prop_6.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_fourway_head_1.png"
+                title="front_right_fourway_head_1.png"
+                alt="front_right_fourway_head_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_fourway_head_1helper.png"
+                title="front_right_fourway_head_1helper.png"
+                alt="front_right_fourway_head_1helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_fourway_head_2.png"
+                title="front_right_fourway_head_2.png"
+                alt="front_right_fourway_head_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_fourway_head_2helper.png"
+                title="front_right_fourway_head_2helper.png"
+                alt="front_right_fourway_head_2helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_fourway_head_3.png"
+                title="front_right_fourway_head_3.png"
+                alt="front_right_fourway_head_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_fourway_head_3helper.png"
+                title="front_right_fourway_head_3helper.png"
+                alt="front_right_fourway_head_3helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_fourway_head_4.png"
+                title="front_right_fourway_head_4.png"
+                alt="front_right_fourway_head_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_fourway_head_4helper.png"
+                title="front_right_fourway_head_4helper.png"
+                alt="front_right_fourway_head_4helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_fourway_head_5.png"
+                title="front_right_fourway_head_5.png"
+                alt="front_right_fourway_head_5.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_fourway_head_5helper.png"
+                title="front_right_fourway_head_5helper.png"
+                alt="front_right_fourway_head_5helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_fourway_head_6.png"
+                title="front_right_fourway_head_6.png"
+                alt="front_right_fourway_head_6.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_fourway_head_6helper.png"
+                title="front_right_fourway_head_6helper.png"
+                alt="front_right_fourway_head_6helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_front_bfs_1.png"
+                title="front_right_front_bfs_1.png"
+                alt="front_right_front_bfs_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_front_bfs_2.png"
+                title="front_right_front_bfs_2.png"
+                alt="front_right_front_bfs_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_front_bfs_3.png"
+                title="front_right_front_bfs_3.png"
+                alt="front_right_front_bfs_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_front_bfs_4.png"
+                title="front_right_front_bfs_4.png"
+                alt="front_right_front_bfs_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_front_sheathing_1.png"
+                title="front_right_front_sheathing_1.png"
+                alt="front_right_front_sheathing_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_front_sheathing_2.png"
+                title="front_right_front_sheathing_2.png"
+                alt="front_right_front_sheathing_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_front_timber_beam_1.png"
+                title="front_right_front_timber_beam_1.png"
+                alt="front_right_front_timber_beam_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_front_timber_beam_2.png"
+                title="front_right_front_timber_beam_2.png"
+                alt="front_right_front_timber_beam_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_front_timber_beam_3.png"
+                title="front_right_front_timber_beam_3.png"
+                alt="front_right_front_timber_beam_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_front_timber_beam_4.png"
+                title="front_right_front_timber_beam_4.png"
+                alt="front_right_front_timber_beam_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_timber_beams.png"
+                title="front_right_timber_beams.png"
+                alt="front_right_timber_beams.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_timber_beam_1.png"
+                title="front_right_timber_beam_1.png"
+                alt="front_right_timber_beam_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_timber_beam_2.png"
+                title="front_right_timber_beam_2.png"
+                alt="front_right_timber_beam_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_timber_beam_3.png"
+                title="front_right_timber_beam_3.png"
+                alt="front_right_timber_beam_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_timber_beam_4.png"
+                title="front_right_timber_beam_4.png"
+                alt="front_right_timber_beam_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_timber_beam_5.png"
+                title="front_right_timber_beam_5.png"
+                alt="front_right_timber_beam_5.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_timber_beam_6.png"
+                title="front_right_timber_beam_6.png"
+                alt="front_right_timber_beam_6.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_timber_beam_7.png"
+                title="front_right_timber_beam_7.png"
+                alt="front_right_timber_beam_7.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_timber_beam_8.png"
+                title="front_right_timber_beam_8.png"
+                alt="front_right_timber_beam_8.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_timber_beam_9.png"
+                title="front_right_timber_beam_9.png"
+                alt="front_right_timber_beam_9.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_tripod_1.png"
+                title="front_right_tripod_1.png"
+                alt="front_right_tripod_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_tripod_2.png"
+                title="front_right_tripod_2.png"
+                alt="front_right_tripod_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_tripod_3.png"
+                title="front_right_tripod_3.png"
+                alt="front_right_tripod_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_tripod_4.png"
+                title="front_right_tripod_4.png"
+                alt="front_right_tripod_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_tripod_5.png"
+                title="front_right_tripod_5.png"
+                alt="front_right_tripod_5.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_tripod_6.png"
+                title="front_right_tripod_6.png"
+                alt="front_right_tripod_6.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_left_bottom_sheathing.png"
+                title="back_left_bottom_sheathing.png"
+                alt="back_left_bottom_sheathing.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/back_right_bottom_sheathing.png"
+                title="back_right_bottom_sheathing.png"
+                alt="back_right_bottom_sheathing.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/column_1_only_rods.png"
+                title="column_1_only_rods.png"
+                alt="column_1_only_rods.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/column_2_only_rods.png"
+                title="column_2_only_rods.png"
+                alt="column_2_only_rods.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/column_3_only_rods.png"
+                title="column_3_only_rods.png"
+                alt="column_3_only_rods.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/column_4_only_rods.png"
+                title="column_4_only_rods.png"
+                alt="column_4_only_rods.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_left_bottom_sheathing.png"
+                title="front_left_bottom_sheathing.png"
+                alt="front_left_bottom_sheathing.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/front_right_bottom_sheathing.png"
+                title="front_right_bottom_sheathing.png"
+                alt="front_right_bottom_sheathing.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_aluminium_beam_1.png"
+                title="slab_aluminium_beam_1.png"
+                alt="slab_aluminium_beam_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_aluminium_beam_2.png"
+                title="slab_aluminium_beam_2.png"
+                alt="slab_aluminium_beam_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_aluminium_beam_3.png"
+                title="slab_aluminium_beam_3.png"
+                alt="slab_aluminium_beam_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_aluminium_beam_4.png"
+                title="slab_aluminium_beam_4.png"
+                alt="slab_aluminium_beam_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_sheathing.png"
+                title="slab_sheathing.png"
+                alt="slab_sheathing.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_stand_1.png"
+                title="slab_stand_1.png"
+                alt="slab_stand_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_stand_2.png"
+                title="slab_stand_2.png"
+                alt="slab_stand_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_stand_3.png"
+                title="slab_stand_3.png"
+                alt="slab_stand_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_stand_4.png"
+                title="slab_stand_4.png"
+                alt="slab_stand_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_stand_5.png"
+                title="slab_stand_5.png"
+                alt="slab_stand_5.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_stand_6.png"
+                title="slab_stand_6.png"
+                alt="slab_stand_6.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_stand_helper.png"
+                title="slab_stand_helper.png"
+                alt="slab_stand_helper.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_timber_beam_1.png"
+                title="slab_timber_beam_1.png"
+                alt="slab_timber_beam_1.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_timber_beam_10.png"
+                title="slab_timber_beam_10.png"
+                alt="slab_timber_beam_10.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_timber_beam_11.png"
+                title="slab_timber_beam_11.png"
+                alt="slab_timber_beam_11.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_timber_beam_12.png"
+                title="slab_timber_beam_12.png"
+                alt="slab_timber_beam_12.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_timber_beam_2.png"
+                title="slab_timber_beam_2.png"
+                alt="slab_timber_beam_2.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_timber_beam_3.png"
+                title="slab_timber_beam_3.png"
+                alt="slab_timber_beam_3.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_timber_beam_4.png"
+                title="slab_timber_beam_4.png"
+                alt="slab_timber_beam_4.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_timber_beam_5.png"
+                title="slab_timber_beam_5.png"
+                alt="slab_timber_beam_5.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_timber_beam_6.png"
+                title="slab_timber_beam_6.png"
+                alt="slab_timber_beam_6.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_timber_beam_7.png"
+                title="slab_timber_beam_7.png"
+                alt="slab_timber_beam_7.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_timber_beam_8.png"
+                title="slab_timber_beam_8.png"
+                alt="slab_timber_beam_8.png" />
+
+              <img
+                class="main-window-imgs"
+                src="./src/images/slab_timber_beam_9.png"
+                title="slab_timber_beam_9.png"
+                alt="slab_timber_beam_9.png" />
+
+              <img class="main-window-imgs" src="./src/images/base_floor_helper.png" />
+              <img class="main-window-imgs" src="./src/images/base_floor_cutout.png" />
+
+              <img class="main-window-imgs" src="./src/images/objective.png" />
+
+              <img class="main-window-imgs" src="./src/images/base_floor_helper_for_back.png" />
 
               <!-- * Videos -->
               <!-- <video muted class="main-window-videos" src="./src/videos/yoke_front_to_back.mp4"></video> -->
@@ -1797,67 +1516,25 @@ src="./src/images/base_floor_helper_for_back.png"
 
               <!-- * Image Box -->
               <div class="image-box">
-                <img class="image" src="" alt="">
+                <img class="image" src="" alt="" />
                 <p class="title">Image Box</p>
               </div>
 
-             <!-- * Temp texts for showing some text in anime -->
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-text"
-              ></span>
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-text2"
-              ></span>
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-title1"
-              ></span>
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-title2"
-              ></span>
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-title3"
-              ></span>
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-title4"
-              ></span>
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-title5"
-              ></span>
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-title6"
-              ></span>
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-title7"
-              ></span>
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-title8"
-              ></span>
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-title9"
-              ></span>
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-title10"
-              ></span>
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-title11"
-              ></span>
-              <span
-                style="background-color: transparent; font-weight: bold"
-                class="temp temp-title12"
-              ></span>
+              <!-- * Temp texts for showing some text in anime -->
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-text"></span>
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-text2"></span>
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-title1"></span>
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-title2"></span>
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-title3"></span>
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-title4"></span>
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-title5"></span>
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-title6"></span>
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-title7"></span>
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-title8"></span>
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-title9"></span>
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-title10"></span>
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-title11"></span>
+              <span style="background-color: transparent; font-weight: bold" class="temp temp-title12"></span>
             </section>
 
             <!-- * Anime Footer -->
@@ -1869,11 +1546,7 @@ src="./src/images/base_floor_helper_for_back.png"
                 <p class="subtitle" id="subtitle"></p>
               </div>
               <btn class="btn btn-next">Next</btn>
-              <btn
-                class="btn btn-save"
-                style="position: absolute; right: 90px; bottom: 5px"
-                >Download</btn
-              >
+              <btn class="btn btn-save" style="position: absolute; right: 90px; bottom: 5px">Download</btn>
             </section>
           </main>
         </div>
